@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Header(props) {
     return (
@@ -27,19 +28,31 @@ function Header(props) {
                     </div>
                     <nav id="navbar" className="navbar order-last order-lg-0">
                         <ul>
-                            <li><a className="nav-link scrollto active" href="index.html">Home</a></li>
-                            <li><a className="nav-link scrollto" href="./pages/departments.html">Departments</a></li>
-                            <li><a className="nav-link scrollto" href="./pages/doctors.html">Doctors</a></li>
-                            <li><a className="nav-link scrollto " href="./pages/about.html">About</a></li>
-                            <li><a className="nav-link scrollto" href="./pages/contact.html">Contact</a></li>
+                            <li><NavLink className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            } to='/'>Home</NavLink></li>
+                            <li><NavLink to='/Department' className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            } >Departments</NavLink></li>
+                            <li><NavLink to='/Doctor' className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            }>Doctors</NavLink></li>
+                            <li><a className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            }>About</a></li>
+                            <li><a to='/Department' className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            }>Contact</a></li>
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
                     <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</a>
-                    <a href="#" className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
-                    </a>
+                    <NavLink to='/auth' className="appointment-btn scrollto">
+                        <span className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            }>Login/ Signup</span>
+                    </NavLink>
                 </div>
             </header>
         </div>
