@@ -8,16 +8,16 @@ export const BaseButton = styled.button`
 `
 
 export const PrimaryButton = styled(BaseButton)`
-    background: #FF6337;
+    background: ${props => props.disabled ? 'grey' : '#FF6337'};
     color: #fff;
 `
 
 export const SecondryButton = styled(BaseButton)`
-    background: #000000;
-    color:#fff;
+    background: ${props => props.disabled ? 'grey' : '#000000'};
+    color: #fff;
 `
 export const OutlineButton = styled(BaseButton)`
     background: none;
     color: #000;
-    border: 2px solid black;
+    border: ${props => props.disabled ? '2px solid black' : '2px solid gray'};
 `

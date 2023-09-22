@@ -1,4 +1,5 @@
 import React from 'react';
+import InputBox from '../../components/UI/InputBox/InputBox';
 
 function Contact(props) {
     return (
@@ -36,14 +37,14 @@ function Contact(props) {
                         <form action method="post" role="form" className="php-email-form">
                             <div className="row">
                                 <div className="col-md-6 form-group">
-                                    <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required />
+                                    <InputBox type="text" name="name" className="form-control" id="name" placeholder="Your Name" required />
                                 </div>
                                 <div className="col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" required />
+                                    <InputBox type="email" className="form-control" name="email" id="email" placeholder="Your Email" required />
                                 </div>
                             </div>
                             <div className="form-group mt-3">
-                                <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required />
+                                <InputBox type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required />
                             </div>
                             <div className="form-group mt-3">
                                 <textarea className="form-control" name="message" rows={5} placeholder="Message" required defaultValue={""} />

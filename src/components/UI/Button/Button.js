@@ -1,7 +1,7 @@
 import React from 'react';
 import { BaseButton, OutlineButton, PrimaryButton, SecondryButton } from './Button.style';
 
-function Button({children, btnType='primary' ,...rest}) {
+function Button({children, btnType='primary', btndisabled=false , ...rest}) {
     console.log(btnType);
     const checkBtnType = () => {
         switch (btnType) {
@@ -20,7 +20,7 @@ function Button({children, btnType='primary' ,...rest}) {
 
     return (
         <>
-            <CustomBtn {...rest}>
+            <CustomBtn disabled={btndisabled} {...rest}>
                 {children}
             </CustomBtn>
         </>

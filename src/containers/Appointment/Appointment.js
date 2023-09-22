@@ -1,4 +1,5 @@
 import React from 'react';
+import InputBox from '../../components/UI/InputBox/InputBox';
 
 function Appointment(props) {
     return (
@@ -13,21 +14,21 @@ function Appointment(props) {
                 <form action method="post" role="form" className="php-email-form">
                     <div className="row">
                         <div className="col-md-4 form-group">
-                            <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <InputBox type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                             <div className="validate" />
                         </div>
                         <div className="col-md-4 form-group mt-3 mt-md-0">
-                            <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                            <InputBox type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
                             <div className="validate" />
                         </div>
                         <div className="col-md-4 form-group mt-3 mt-md-0">
-                            <input type="tel" className="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <InputBox type="tel" className="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                             <div className="validate" />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md-4 form-group mt-3">
-                            <input type="datetime" name="date" className="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <InputBox type="datetime" name="date" className="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                             <div className="validate" />
                         </div>
                         <div className="col-md-4 form-group mt-3">

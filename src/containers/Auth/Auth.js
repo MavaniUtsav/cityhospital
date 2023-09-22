@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from '../../components/UI/Button/Button';
+import InputBox from '../../components/UI/InputBox/InputBox';
 
 function Auth(props) {
     const [type, setType] = useState('login')
@@ -19,21 +20,21 @@ function Auth(props) {
                             {   
 
                                 type === 'signup' ? <div class="col-md-8 form-group">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4"
+                                    <InputBox type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4"
                                         data-msg="Please enter at least 4 chars" />
                                     <div class="validate"></div>
                                 </div> : null
                             }
 
                             <div class="col-md-8 form-group mt-3 mt-md-0">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email"
+                                <InputBox type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email"
                                     data-msg="Please enter a valid email" />
                                 <div class="validate"></div>
                             </div>
 
                             {
                                 type === 'login' || type === 'signup' ? <div class="col-md-8 form-group mt-3 mt-md-0">
-                                <input type="password" class="form-control" name="password" id="phone" placeholder="Your password" data-rule="minlen:4"
+                                <InputBox type="password" class="form-control" name="password" id="phone" placeholder="Your password" data-rule="minlen:4"
                                     data-msg="Please enter at least 4 chars" />
                                 <div class="validate"></div>
                             </div> : ''
@@ -42,8 +43,8 @@ function Auth(props) {
 
                             <div class="text-center">
                                 {
-                                    type === 'login' ? <Button type="submit">Login</Button> :
-                                     type === 'signup' ? <Button btnType="secondry" type="submit">Signup</Button> :
+                                    type === 'login' ? <Button type="submit" disabled={true}>Login</Button> :
+                                     type === 'signup' ? <Button btndisabled={true} btnType="secondry" type="submit">Signup</Button> :
                                       <Button btnType="outline" type="submit">Submit</Button>
                                 }
                             </div>
