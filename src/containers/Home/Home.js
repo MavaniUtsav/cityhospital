@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heading1 } from '../../components/UI/Heading/Heading.style';
+import { InnerText, InnerText2 } from '../../components/UI/Text/text.style';
 
 function Main(props) {
     return (
@@ -59,42 +60,42 @@ function Main(props) {
                             <div className="icon-box">
                                 <div className="icon"><i className="fas fa-hospital-alt" /></div>
                                 <h4><a href>24x7 Emergency Available</a></h4>
-                                <p>Nullam accumsan, velit et porta consequat, purus leo congue risus</p>
+                                <InnerText>Nullam accumsan, velit et porta consequat, purus leo congue risus</InnerText>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
                             <div className="icon-box">
                                 <div className="icon"><i className="fas fa-bed" /></div>
                                 <h4><a href>40+ Bed Facilities</a></h4>
-                                <p>Pellentesque id felis elit. Pellentesque blandit sem a nisi dictum</p>
+                                <InnerText>Pellentesque id felis elit. Pellentesque blandit sem a nisi dictum</InnerText>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
                             <div className="icon-box">
                                 <div className="icon"><i className="fas fa-hospital-user" /></div>
                                 <h4><a href>Cardiogram Machine</a></h4>
-                                <p>Donec lacinia finibus tortor. Curabitur luctus eleifend odio.</p>
+                                <InnerText>Donec lacinia finibus tortor. Curabitur luctus eleifend odio.</InnerText>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
                             <div className="icon-box">
                                 <div className="icon"><i className="fas fa-dna" /></div>
                                 <h4><a href>X-ray and Sonography</a></h4>
-                                <p>Aliquam auctor felis ut sem elementum, ac rutrum turpis venenatis.</p>
+                                <InnerText>Aliquam auctor felis ut sem elementum, ac rutrum turpis venenatis.</InnerText>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
                             <div className="icon-box">
                                 <div className="icon"><i className="fas fa-wheelchair" /></div>
                                 <h4><a href>Semi Special, Special and Delux Room Available</a></h4>
-                                <p>Etiam in massa eu neque euismod consectetur.</p>
+                                <InnerText>Etiam in massa eu neque euismod consectetur.</InnerText>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
                             <div className="icon-box">
                                 <div className="icon"><i className="fas fa-notes-medical" /></div>
                                 <h4><a href>Medical</a></h4>
-                                <p>Morbi vulputate, tortor nec pellentesque molestie</p>
+                                <InnerText>Morbi vulputate, tortor nec pellentesque molestie</InnerText>
                             </div>
                         </div>
                     </div>
@@ -111,14 +112,14 @@ function Main(props) {
                                         <img src="assets/img/testimonials/testimonials-1.jpg" className="testimonial-img" alt />
                                         <h3>Jacob Wilsson</h3>
                                         <h4>Writer</h4>
-                                        <p>
+                                        <InnerText2>
                                             <i className="bx bxs-quote-alt-left quote-icon-left" />
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere, lacus ac tincidunt tempor,
                                             sapien justo ultrices ante, vel pharetra turpis ex ac nisi. Aliquam tempor egestas turpis, nec
                                             commodo lorem egestas eleifend. Curabitur lacus ipsum, fermentum sit amet leo non, blandit tincidunt
                                             turpis.
                                             <i className="bx bxs-quote-alt-right quote-icon-right" />
-                                        </p>
+                                        </InnerText2>
                                     </div>
                                 </div>
                             </div>

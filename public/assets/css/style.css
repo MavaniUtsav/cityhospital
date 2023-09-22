@@ -994,11 +994,11 @@ section {
   color: #2c4964;
 }
 
-.services .icon-box p {
+/* .services .icon-box p {
   line-height: 24px;
   font-size: 14px;
   margin-bottom: 0;
-}
+} */
 
 .services .icon-box:hover {
   background: #FF6337;
@@ -1421,10 +1421,10 @@ section {
   top: 10px;
 }
 
-.testimonials .testimonial-item p {
+/* .testimonials .testimonial-item p {
   font-style: italic;
   margin: 15px auto 15px auto;
-}
+} */
 
 .testimonials .swiper-pagination {
   margin-top: 20px;
