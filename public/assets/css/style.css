@@ -1081,7 +1081,7 @@ section {
   padding: 10px 12px;
 }
 
-.appointment .php-email-form button[type="submit"] {
+/* .appointment .php-email-form button[type="submit"] {
   background: #FF6337;
   border: 0;
   padding: 10px 35px;
@@ -1092,7 +1092,7 @@ section {
 
 .appointment .php-email-form button[type="submit"]:hover {
   background: #1c84e3;
-}
+} */
 
 /*--------------------------------------------------------------
 # Departments
