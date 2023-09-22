@@ -1,11 +1,12 @@
 import React from 'react';
+import { Heading1, SubHeading } from '../../components/UI/Heading/Heading.style';
 
 function Department(props) {
     return (
         <section id="departments" className="departments">
             <div className="container">
                 <div className="section-title">
-                    <h2>Departments</h2>
+                    <Heading1>Departments</Heading1>
                 </div>
                 <div className="row">
                     <div className="col-lg-3">
@@ -32,7 +33,7 @@ function Department(props) {
                             <div className="tab-pane active show" id="tab-1">
                                 <div className="row">
                                     <div className="col-lg-8 details order-2 order-lg-1">
-                                        <h3>E.N.T</h3>
+                                        <SubHeading>E.N.T</SubHeading>
                                         <p className="fst-italic">Vestibulum volutpat luctus quam sed finibus. Sed luctus odio eget ex posuere
                                             hendrerit. Donec iaculis nisi ut purus dapibus</p>
                                         <p>Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit,

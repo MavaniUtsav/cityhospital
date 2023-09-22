@@ -1,4 +1,5 @@
 import React from 'react';
+import { Heading1 } from '../../components/UI/Heading/Heading.style';
 
 function Main(props) {
     return (
@@ -48,7 +49,7 @@ function Main(props) {
             <section id="services" className="services">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Our Facilities</h2>
+                        <Heading1>Our Facilities</Heading1>
                         <p>Nunc aliquam eget nibh eu euismod. Donec dapibus blandit quam volutpat sollicitudin. Fusce tincidunt sit
                             amet ex in volutpat. Donec lacinia finibus tortor. Curabitur luctus eleifend odio. Phasellus placerat mi et
                             suscipit pulvinar. Donec quis tristique lectus.</p>
@@ -101,7 +102,7 @@ function Main(props) {
             </section>
             <section id="testimonials" className="testimonials">
                 <div className="container">
-                    <div className="section-title"><h2>Reviews</h2></div>
+                    <div className="section-title"><Heading1>Reviews</Heading1></div>
                     <div className="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="swiper-wrapper">
                             <div className="swiper-slide">
@@ -193,7 +194,7 @@ function Main(props) {
             <section id="gallery" className="gallery">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Gallery</h2>
+                        <Heading1>Gallery</Heading1>
                         <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
                             consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
                             in iste officiis commodi quidem hic quas.</p>

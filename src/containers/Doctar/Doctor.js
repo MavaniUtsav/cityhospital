@@ -1,11 +1,12 @@
 import React from 'react';
+import { Heading1, Heading3 } from '../../components/UI/Heading/Heading.style';
 
 function Doctor(props) {
     return (
         <section id="doctors" className="doctors">
             <div className="container">
                 <div className="section-title">
-                    <h2>Doctors</h2>
+                    <Heading1>Doctors</Heading1>
                     <p>Duis sagittis rutrum neque, quis tincidunt arcu pretium ac. Suspendisse sem risus, molestie vitae arcu et,
                         tincidunt viverra erat. Quisque in lectus id nulla viverra sodales in a risus. Aliquam ut sem ex. Duis viverra
                         ipsum lacus, ut pharetra arcu sagittis nec. Phasellus a eleifend elit.</p>
@@ -15,7 +16,7 @@ function Doctor(props) {
                         <div className="member d-flex align-items-start">
                             <div className="pic"><img src="../assets/img/doctors/doctors-1.jpg" className="img-doctor" alt /></div>
                             <div className="member-info">
-                                <h4>Atha Smith</h4>
+                                <Heading3>Atha Smith</Heading3>
                                 <span>Chief Medical Officer</span>
                                 <p>Duis sagittis rutrum neque, quis tincidunt arcu pretium ac.</p>
                                 <div className="social">
@@ -31,7 +32,7 @@ function Doctor(props) {
                         <div className="member d-flex align-items-start">
                             <div className="pic"><img src="../assets/img/doctors/doctors-2.jpg" className="img-doctor" alt /></div>
                             <div className="member-info">
-                                <h4>John White</h4>
+                                <Heading3>John White</Heading3>
                                 <span>Anesthesiologist</span>
                                 <p>Aenean ac turpis ante. Mauris velit sapien.</p>
                                 <div className="social">
@@ -47,7 +48,7 @@ function Doctor(props) {
                         <div className="member d-flex align-items-start">
                             <div className="pic"><img src="../assets/img/doctors/doctors-3.jpg" className="img-doctor" alt /></div>
                             <div className="member-info">
-                                <h4>Umika Loha</h4>
+                                <Heading3>Umika Loha</Heading3>
                                 <span>Cardiology</span>
                                 <p>Curabitur luctus eleifend odio. Phasellus placerat mi.</p>
                                 <div className="social">
@@ -63,7 +64,7 @@ function Doctor(props) {
                         <div className="member d-flex align-items-start">
                             <div className="pic"><img src="../assets/img/doctors/doctors-4.jpg" className="img-doctor" alt /></div>
                             <div className="member-info">
-                                <h4>Daimy Smith</h4>
+                                <Heading3>Daimy Smith</Heading3>
                                 <span>Neurosurgeon</span>
                                 <p>Morbi vulputate, tortor nec pellentesque molestie, eros nisi ornare purus.</p>
                                 <div className="social">
