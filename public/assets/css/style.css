@@ -1752,3 +1752,15 @@ section {
 .main-header {
   height: 138px;
 }
+
+#btn a {
+  text-decoration: underline;
+}
+
+#form_footer {
+  margin: 5px auto;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 3px;
+  width: 856px;
+}

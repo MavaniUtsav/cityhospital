@@ -7,6 +7,9 @@ import { Route, Routes } from 'react-router-dom';
 import Department from './containers/Department/Department';
 import Doctor from './containers/Doctar/Doctor';
 import Auth from './containers/Auth/Auth';
+import About from './containers/About/About';
+import Contact from './containers/Contact/Contact';
+import Appointment from './containers/Appointment/Appointment';
 
 
 function App() {
@@ -14,10 +17,13 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/Department' element={<Department />} />
-        <Route path='/Doctor' element={<Doctor />} />
-        <Route path='/auth' element={<Auth />} />
+        <Route exact path='/' element={<Main />} />
+        <Route exact path='/Department' element={<Department />} />
+        <Route exact path='/Doctor' element={<Doctor />} />
+        <Route exact path='/About' element={<About />} />
+        <Route exact path='/Contact' element={<Contact />}/>
+        <Route exact path='/auth' element={<Auth />} />
+        <Route exact path='/appointment' element={<Appointment />} />
       </Routes>
       <Footer />
     </>

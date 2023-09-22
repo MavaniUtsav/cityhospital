@@ -17,7 +17,7 @@ function Auth(props) {
 
                             {   
 
-                                type === 'login' || 'signup' ? null : <div class="col-md-8 form-group">
+                                type === 'login' ? null : <div class="col-md-8 form-group">
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4"
                                         data-msg="Please enter at least 4 chars" />
                                     <div class="validate"></div>
@@ -43,10 +43,16 @@ function Auth(props) {
                             </div>
                         </div>
                     </form>
+                    <div id='form_footer'>
                     {
-                        type === 'login' ? <span>Create an Account <button onClick={() => setType('signup')}>Signup</button></span> :
-                            <span>Already have Account? <button onClick={() => setType('login')}>Login</button></span>
+                        type === 'login' ? <span id='btn'>Create an Account?  <a href='#' onClick={() => setType('signup')}>Signup</a></span> :
+                            <span id='btn'>Already have Account?  <a href='#' onClick={() => setType('login')}>Login</a></span>
                     }
+                    {
+                        type === 'login' ? <a href='#'>Forgot your password?</a> : ''
+                    }
+                    </div>
+                    
                 </section>
             </div>
         </section>

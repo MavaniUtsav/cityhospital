@@ -37,17 +37,17 @@ function Header(props) {
                             <li><NavLink to='/Doctor' className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             }>Doctors</NavLink></li>
-                            <li><a className={({ isActive, isPending }) =>
+                            <li><NavLink to='/About' className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
-                            }>About</a></li>
-                            <li><a to='/Department' className={({ isActive, isPending }) =>
+                            }>About</NavLink></li>
+                            <li><NavLink to='/Contact' className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
-                            }>Contact</a></li>
+                            }>Contact</NavLink></li>
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
-                    <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
-                        Appointment</a>
+                    <NavLink to='/appointment' className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
+                        Appointment</NavLink>
                     <NavLink to='/auth' className="appointment-btn scrollto">
                         <span className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
