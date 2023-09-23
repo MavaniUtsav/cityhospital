@@ -1426,6 +1426,12 @@ section {
   margin: 15px auto 15px auto;
 } */
 
+#main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .testimonials .swiper-pagination {
   margin-top: 20px;
   position: relative;
