@@ -1,12 +1,25 @@
 import React from 'react';
-import { BaseCardBox, ProductDetail, ProductImg } from './CardBox.style';
+import { BaseCardBox, Descri, Heading4, Heading5, ProductDetail, ProductImg, SpanCategory } from './CardBox.style';
 
-function CardBox( {children, ...rest} ) {
+function CardBox({ children, data, ...rest }) {
     return (
         <>
-            <BaseCardBox>
-                {children}
-            </BaseCardBox>
+            {
+                data.map((v, i) => {
+                    return (
+                        <BaseCardBox {...rest}>
+                            <ProductImg>{v.url}</ProductImg>
+                            <ProductDetail>
+                                <SpanCategory>{v.category}</SpanCategory>
+                                <Heading4>{v.name}</Heading4>
+                                <Descri>{v.description}</Descri>
+                                <Heading5>{v.price}</Heading5>
+                            </ProductDetail>
+                        </BaseCardBox>
+                    )
+                })
+            }
+
         </>
     );
 }

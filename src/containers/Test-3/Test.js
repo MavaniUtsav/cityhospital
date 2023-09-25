@@ -160,28 +160,12 @@ function ProductPage2(props) {
     ]
 
     return (
-        <>  
+        <>
             <div id='main'>
                 {
-                    data.map((value, i) => {
-                        return (
-                            <CardBox class="product-card">
-                                <ProductImg class="product-tumb">
-                                    <img src={value.url} alt="" />
-                                </ProductImg>
-                                <ProductDetail class="product-details">
-                                    <span class="product-catagory">{value.category}</span>
-                                    <h4><a href="">{value.title}</a></h4>
-                                    <p>{value.description}</p>
-                                    <div class="product-bottom-details">
-                                        <div class="product-price">${value.price}</div>
-                                    </div>
-                                </ProductDetail>
-                            </CardBox>
-                        )
-                        
-                        // console.log(value)
-                    })
+                    <CardBox data={data}>
+
+                    </CardBox>
                 }
             </div>
         </>
