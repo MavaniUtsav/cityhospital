@@ -163,9 +163,18 @@ function ProductPage2(props) {
         <>
             <div id='main'>
                 {
-                    <CardBox data={data}>
+                    data.map((v, i) => {
+                        return (
+                            <CardBox
+                                img={v.url}
+                                category={v.category}
+                                title={v.name}
+                                description={v.description}
+                                price={v.price}
+                            />
+                        )
+                    })
 
-                    </CardBox>
                 }
             </div>
         </>

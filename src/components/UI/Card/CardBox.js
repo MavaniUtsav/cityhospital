@@ -1,25 +1,18 @@
 import React from 'react';
 import { BaseCardBox, Descri, Heading4, Heading5, ProductDetail, ProductImg, SpanCategory } from './CardBox.style';
 
-function CardBox({ children, data, ...rest }) {
+function CardBox({ img='', category='', title='', description='', price='' }) {
     return (
         <>
-            {
-                data.map((v, i) => {
-                    return (
-                        <BaseCardBox {...rest}>
-                            <ProductImg>{v.url}</ProductImg>
-                            <ProductDetail>
-                                <SpanCategory>{v.category}</SpanCategory>
-                                <Heading4>{v.name}</Heading4>
-                                <Descri>{v.description}</Descri>
-                                <Heading5>{v.price}</Heading5>
-                            </ProductDetail>
-                        </BaseCardBox>
-                    )
-                })
-            }
-
+            <BaseCardBox>
+                <ProductImg>{img}</ProductImg>
+                <ProductDetail>
+                    <SpanCategory>{category}</SpanCategory>
+                    <Heading4>{title}</Heading4>
+                    <Descri>{description}</Descri>
+                    <Heading5>{price}</Heading5>
+                </ProductDetail>
+            </BaseCardBox>
         </>
     );
 }

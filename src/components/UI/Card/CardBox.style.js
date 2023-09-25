@@ -9,6 +9,11 @@ export const BaseCardBox = styled.div`
     margin-right: 50px;
     background: #fafafa;
     // float: right;
+
+    &:hover {
+        transform: scale(1.06,1.06);
+        transition: all 0.7s;
+    }
 `
 
 export const ProductImg = styled.div`
@@ -54,7 +59,6 @@ export const Descri = styled.p`
     color: #999;
 `
 export const Heading5 = styled.div`
-    float: left;
     width: 50%;
 `
 

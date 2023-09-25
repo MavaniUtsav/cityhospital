@@ -1,6 +1,18 @@
 import React from 'react';
-import { Heading1 } from '../../components/UI/Heading/Heading.style';
+import { He3, Heading1, Heading3 } from '../../components/UI/Heading/Heading.style';
 import { InnerText, InnerText2 } from '../../components/UI/Text/text.style';
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import Feedback from '../../components/UI/Feedback/Feedback';
+
+// init Swiper:
+const swiper = new Swiper('.swiper', {
+    // configure Swiper to use modules
+    modules: [Navigation, Pagination]
+});
 
 function Main(props) {
     return (
@@ -190,6 +202,7 @@ function Main(props) {
                             </div>
                         </div>
                     </div>
+                    <Feedback />
                 </div>
             </section>
             <section id="gallery" className="gallery">
