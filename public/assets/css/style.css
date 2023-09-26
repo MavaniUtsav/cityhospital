@@ -472,6 +472,7 @@ h6 {
   background: url("../img/hero-bg.jpg") top center;
   background-size: cover;
   margin-bottom: -200px;
+  overflow: hidden;
 }
 
 #hero .container {
@@ -1810,4 +1811,8 @@ section {
   justify-content: space-between;
   column-gap: 3px;
   width: 856px;
+}
+
+#reviewComment {
+  display: flex;
 }

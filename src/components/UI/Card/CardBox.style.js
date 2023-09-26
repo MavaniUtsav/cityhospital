@@ -40,7 +40,7 @@ export const SpanCategory = styled.span`
 
 export const Heading4 = styled.a`
     font-weight: 500;
-    display: block;
+    // display: block;
     margin-bottom: 18px;
     text-transform: uppercase;
     color: #363636;
