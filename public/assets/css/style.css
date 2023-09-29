@@ -1596,7 +1596,7 @@ section {
   padding: 10px 12px;
 }
 
-.contact .php-email-form button[type="submit"] {
+.contact .php-email-form button[type="submit"], #appointmentbtn {
   background: #FF6337;
   border: 0;
   padding: 10px 35px;
@@ -1605,7 +1605,7 @@ section {
   border-radius: 50px;
 }
 
-.contact .php-email-form button[type="submit"]:hover {
+.contact .php-email-form button[type="submit"]:hover, #appointmentbtn:hover {
   background: #1c84e3;
 }
 
