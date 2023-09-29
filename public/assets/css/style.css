@@ -1428,8 +1428,6 @@ section {
 } */
 
 #main {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
 }
 

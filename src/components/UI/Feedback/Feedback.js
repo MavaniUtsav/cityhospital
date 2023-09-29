@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import CardBox from '../Card/CardBox';
-import { Descri, Heading4, ProductDetail, SpanCategory } from '../Card/CardBox.style';
-// import Swiper JS
-import Swiper from 'swiper';
-// import Swiper styles
-import 'swiper/css';
+import { Heading1 } from '../Heading/Heading.style';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-const swiper = new Swiper();
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Navigation } from 'swiper/modules';
+
 
 function Feedback(props) {
     const [commentData, setCommentData] = useState([]);
@@ -15,52 +18,56 @@ function Feedback(props) {
         const response = await fetch('https://jsonplaceholder.typicode.com/comments')
         const data = await response.json();
 
-        console.log(data, 'data');
         setCommentData(data)
     }
 
     useEffect(() => {
         getData();
-    }, [commentData]);
+    }, []);
+
+    console.log(commentData);
 
     return (
-        <div id='reviewComment'>
-            <div className="swiper">
-                <div className="swiper-wrapper">
+        <section id="testimonials" className="testimonials">
+            <div className="container">
+                <div className="section-title"><Heading1>Reviews</Heading1></div>
+                <Swiper
+                    navigation={true}
+                    modules={[Navigation]}
+                    className="mySwiper"
+                    slidesPerView={1}
+                    spaceBetween={10}
+                    breakpoints={{
+                        640: {
+                          slidesPerView: 2,
+                          spaceBetween: 20,
+                        },
+                        768: {
+                          slidesPerView: 4,
+                          spaceBetween: 40,
+                        },
+                        1024: {
+                          slidesPerView: 3,
+                          spaceBetween: 20,
+                        },
+                      }}
+                >
+                    {
+                        commentData.map((value, index) => {
+                            return (
+                                <SwiperSlide>
 
-
-                    {commentData.map((value, index) => {
-                        return (
-                            <div className="swiper-slide">
-                                <ProductDetail>
-                                    <Heading4>{value.name}</Heading4>
-                                    <Descri>{value.body}</Descri>
-                                </ProductDetail>
-                            </div>
-                        )
-                    })}
-                    ...
-                </div>
-                <div className="swiper-pagination" />
-                <div className="swiper-button-prev" />
-                <div className="swiper-button-next" />
-                <div className="swiper-scrollbar" />
-            </div> 
-
-            {/* <Swiper>
-                {commentData.map((value, index) => {
-                    return (
-                        <SwiperSlide>
-                            <ProductDetail>
-                                <Heading4>{value.name}</Heading4>
-                                <Descri>{value.body}</Descri>
-                            </ProductDetail>
-                        </SwiperSlide>
-                    )
-                })}
-            </Swiper> */}
-
-        </div>
+                                    <CardBox
+                                        title={value.name}
+                                        description={value.body}
+                                    />
+                                </SwiperSlide>
+                            )
+                        })
+                    }
+                </Swiper>
+            </div>
+        </section>
     );
 }
 
