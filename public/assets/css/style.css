@@ -1814,3 +1814,7 @@ section {
 #reviewComment {
   display: flex;
 }
+
+.error {
+  color: red;
+}
