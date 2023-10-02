@@ -23,3 +23,7 @@ export const BaseInput = styled.input`
     font-size: 14px;
     padding: 10px !important;
 `
+
+export const ErrorBox = styled.span`
+    color: red;
+`

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InputBox from '../../components/UI/InputBox/InputBox';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
 function Appointment(props) {
+
+    const [selectedFile, setSelectedFile] = useState();
+	const [isFilePicked, setIsFilePicked] = useState(false);
 
     const date = new Date()
     date.setDate(date.getDate() - 1);
@@ -29,10 +32,17 @@ function Appointment(props) {
             }),
         file: yup.mixed()
             .required()
-            // .test("FILE_SIZE", "Uploaded file is too big.",
-            //     (value) => console.log(value.size))
-            // .test("FILE_FORMAT", "Uploaded file has unsupported format.",
-            //     (value) => console.log(value.type))
+            .test("FILE_SIZE", "Uploaded file is too big.",(value) => {
+                if (selectedFile.size <= 20000000) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+        // .test("FILE_SIZE", "Uploaded file is too big.",
+        //     (value) => value && value.size <= 2000)
+        // .test("FILE_FORMAT", "Uploaded file has unsupported format.",
+        //     (value) => console.log(value.type))
     });
 
     const formikObj = useFormik({
@@ -64,7 +74,13 @@ function Appointment(props) {
 
     const { handleSubmit, handleBlur, handleChange, handleReset, errors, touched, values } = formikObj;
 
+    // const changeHandler = (event) => {
+    //     setSelectedFile(event.files[0]);
+	// 	setIsFilePicked(true);
 
+    //     console.log(selectedFile);
+    // }
+    console.log(selectedFile.size);
     return (
         <section id="appointment" className="appointment">
             <div className="container">
@@ -165,7 +181,7 @@ function Appointment(props) {
                                 name="file"
                                 className="form-control"
                                 onBlur={handleBlur}
-                                onChange={handleChange}
+                                onChange={(e) => setSelectedFile(e.target.files[0])}
                                 value={values.file}
                                 accept=".jpg"
                             />
