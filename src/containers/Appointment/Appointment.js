@@ -29,10 +29,10 @@ function Appointment(props) {
             }),
         file: yup.mixed()
             .required()
-            .test("FILE_SIZE", "Uploaded file is too big.",
-                value => !value || (value && value.size <= 2))
-            .test("FILE_FORMAT", "Uploaded file has unsupported format.",
-                value => !value || (value && jpg.includes(value.type)))
+            // .test("FILE_SIZE", "Uploaded file is too big.",
+            //     (value) => console.log(value.size))
+            // .test("FILE_FORMAT", "Uploaded file has unsupported format.",
+            //     (value) => console.log(value.type))
     });
 
     const formikObj = useFormik({
@@ -164,7 +164,10 @@ function Appointment(props) {
                                 type="file"
                                 name="file"
                                 className="form-control"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
                                 value={values.file}
+                                accept=".jpg"
                             />
                             {errors.file && touched.file ? <span className='error'>{errors.file}</span> : null}
                         </div>
