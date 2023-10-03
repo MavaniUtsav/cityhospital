@@ -3,6 +3,7 @@ import InputBox from '../../components/UI/InputBox/InputBox';
 import { Heading1 } from '../../components/UI/Heading/Heading.style';
 import * as yup from "yup";
 import { useFormik } from 'formik';
+import BackBtn from '../../components/UI/BackBtn/BackBtn';
 
 function Contact(props) {
 
@@ -11,9 +12,9 @@ function Contact(props) {
         email: yup.string().email('Please Enter Valid Email').required('Please enter email'),
         subject: yup.string().required('Please enter Subject').max(30, 'Please enter maximum 30 charachter'),
         message: yup.string()
-        .required('Please enter Message')
-        .min(20, 'Minimum 20 charachter required')
-        .max(100, 'Maximum 100 charachter allowed')
+            .required('Please enter Message')
+            .min(20, 'Minimum 20 charachter required')
+            .max(100, 'Maximum 100 charachter allowed')
 
     });
 
@@ -35,6 +36,7 @@ function Contact(props) {
     return (
         <section id="contact" className="contact">
             <div className="container">
+                <BackBtn />
                 <div className="section-title">
                     <Heading1>Contact</Heading1>
                     <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus

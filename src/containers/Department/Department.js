@@ -1,10 +1,12 @@
 import React from 'react';
 import { Heading1, SubHeading } from '../../components/UI/Heading/Heading.style';
+import BackBtn from '../../components/UI/BackBtn/BackBtn';
 
 function Department(props) {
     return (
         <section id="departments" className="departments">
             <div className="container">
+                <BackBtn />
                 <div className="section-title">
                     <Heading1>Departments</Heading1>
                 </div>

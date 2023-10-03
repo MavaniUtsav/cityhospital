@@ -3,6 +3,7 @@ import Button from '../../components/UI/Button/Button';
 import InputBox from '../../components/UI/InputBox/InputBox';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import BackBtn from '../../components/UI/BackBtn/BackBtn';
 
 function Auth(props) {
     const [type, setType] = useState('login');
@@ -62,6 +63,7 @@ function Auth(props) {
     return (
         <section id="doctors" class="doctors">
             <div class="container">
+                <BackBtn />
                 <div class="section-title">
                     {
                         type === 'login' ? <h2>Login</h2> : type === 'signup' ? <h2>Signup</h2> : <h2>Forgot password</h2>

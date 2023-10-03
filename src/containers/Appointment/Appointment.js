@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InputBox from '../../components/UI/InputBox/InputBox';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import BackBtn from '../../components/UI/BackBtn/BackBtn';
 
 function Appointment(props) {
 
@@ -85,6 +86,7 @@ function Appointment(props) {
     return (
         <section id="appointment" className="appointment">
             <div className="container">
+                <BackBtn />
                 <div className="section-title">
                     <h2>Make an Appointment</h2>
                     <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Heading1, Heading3 } from '../../components/UI/Heading/Heading.style';
+import BackBtn from '../../components/UI/BackBtn/BackBtn';
 
 function Doctor(props) {
     return (
         <section id="doctors" className="doctors">
             <div className="container">
+                <BackBtn />
                 <div className="section-title">
                     <Heading1>Doctors</Heading1>
                     <p>Duis sagittis rutrum neque, quis tincidunt arcu pretium ac. Suspendisse sem risus, molestie vitae arcu et,

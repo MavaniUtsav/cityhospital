@@ -1,10 +1,12 @@
 import React from 'react';
 import { SubHeading2 } from '../../components/UI/Heading/Heading.style';
+import BackBtn from '../../components/UI/BackBtn/BackBtn';
 
 function About(props) {
     return (
         <section id="about" className="about">
             <div className="container">
+                <BackBtn />
                 <div className="row">
                     <div className="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center px-lg-5 abouttop">
                         <SubHeading2>Fusce nec risus at enim congue bibendum quis at augue. </SubHeading2>
