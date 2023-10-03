@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 function Appointment(props) {
 
     const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
+    const [isFilePicked, setIsFilePicked] = useState(false);
 
     const date = new Date()
     date.setDate(date.getDate() - 1);
@@ -32,12 +32,13 @@ function Appointment(props) {
             }),
         file: yup.mixed()
             .required()
-            .test("FILE_SIZE", "Uploaded file is too big.",(value) => {
-                if (selectedFile.size <= 20000000) {
-                    return true;
-                } else {
-                    return false;
-                }
+            .test("FILE_SIZE", "Uploaded file is too big.", (value) => {
+                // if (selectedFile <= 20000000) {
+                //     return true;
+                // } else {
+                //     return false;
+                // }
+                console.log(value);
             })
         // .test("FILE_SIZE", "Uploaded file is too big.",
         //     (value) => value && value.size <= 2000)
@@ -76,11 +77,11 @@ function Appointment(props) {
 
     // const changeHandler = (event) => {
     //     setSelectedFile(event.files[0]);
-	// 	setIsFilePicked(true);
+    // 	setIsFilePicked(true);
 
     //     console.log(selectedFile);
     // }
-    console.log(selectedFile.size);
+    // console.log(selectedFile);
     return (
         <section id="appointment" className="appointment">
             <div className="container">
@@ -181,7 +182,7 @@ function Appointment(props) {
                                 name="file"
                                 className="form-control"
                                 onBlur={handleBlur}
-                                onChange={(e) => setSelectedFile(e.target.files[0])}
+                                onChange={(e) => setSelectedFile(e.target.files[0].size)}
                                 value={values.file}
                                 accept=".jpg"
                             />
