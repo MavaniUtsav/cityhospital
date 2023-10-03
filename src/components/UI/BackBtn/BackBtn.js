@@ -3,6 +3,8 @@ import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
 
 function BackBtn(props) {
+
+
     const navigate = useNavigate()
 
     // 2 Type to add goBack functionality
