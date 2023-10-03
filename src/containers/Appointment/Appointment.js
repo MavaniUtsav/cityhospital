@@ -107,7 +107,6 @@ function Appointment(props) {
                                 value={values.name}
                             />
                             {errors.name && touched.name ? <span className='error'>{errors.name}</span> : null}
-                            <div className="validate" />
                         </div>
                         <div className="col-md-4 form-group mt-3 mt-md-0">
                             <InputBox
