@@ -1,6 +1,9 @@
 import React from 'react';
 import { SubHeading2 } from '../../components/UI/Heading/Heading.style';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
+import OurTeam from '../NestedRouting Comp/OurTeam';
+import Button from '../../components/UI/Button/Button';
+import { Link, Outlet } from 'react-router-dom';
 
 function About(props) {
     return (
@@ -18,6 +21,16 @@ function About(props) {
                             rutrum neque, quis tincidunt arcu pretium ac. Suspendisse sem </p>
                     </div>
                 </div>
+                <div id='nested'>
+                    <Link to='ourteam'>
+                        <Button btnType='outline' >Our Team</Button>
+                    </Link>
+                    <Link to='ourtreatments'>
+                        <Button btnType='outline' >All Treatments</Button>
+                    </Link>
+                </div>
+                <Outlet />
+
             </div>
         </section>
     );

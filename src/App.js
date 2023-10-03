@@ -12,6 +12,9 @@ import Contact from './containers/Contact/Contact';
 import Appointment from './containers/Appointment/Appointment';
 import CardBox from './components/UI/Card/CardBox';
 import ProductPage2 from './containers/Test-3/Test';
+import Error from './containers/Error/Error';
+import OurTeam from './containers/NestedRouting Comp/OurTeam';
+import ToDepartment from './containers/NestedRouting Comp/ToDepartment';
 
 
 function App() {
@@ -22,10 +25,14 @@ function App() {
         <Route exact path='/' element={<Main />} />
         <Route exact path='/Department' element={<Department />} />
         <Route exact path='/Doctor' element={<Doctor />} />
-        <Route exact path='/About' element={<About />} />
+        <Route exact path='/About/' element={<About />}>
+          <Route path='ourteam' element={<OurTeam />} />
+          <Route path='ourtreatments' element={<ToDepartment />} />
+        </Route>
         <Route exact path='/Contact' element={<Contact />}/>
         <Route exact path='/auth' element={<Auth />} />
         <Route exact path='/appointment' element={<Appointment />} />
+        <Route exact path='*' element={<Error />} />
       </Routes>
       <CardBox />
       <Footer />

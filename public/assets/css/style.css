@@ -1818,3 +1818,19 @@ section {
 .error {
   color: red;
 }
+
+#errorpage {
+  display: flex;
+  justify-content: center;
+}
+
+#errorpage img {
+  width: 100vh;
+}
+
+#nested {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  column-gap: 15rem;
+}

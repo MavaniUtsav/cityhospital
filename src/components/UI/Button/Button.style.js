@@ -19,5 +19,6 @@ export const SecondryButton = styled(BaseButton)`
 export const OutlineButton = styled(BaseButton)`
     background: none;
     color: #000;
-    border: ${props => props.disabled ? '2px solid black' : '2px solid gray'};
+    border: ${props => props.disabled ? '2px solid black' : '2px solid #FF6337'};
+    font-weight: 500;
 `

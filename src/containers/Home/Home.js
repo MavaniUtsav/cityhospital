@@ -7,6 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Feedback from '../../components/UI/Feedback/Feedback';
+import { Outlet } from 'react-router-dom';
 
 // init Swiper:
 const swiper = new Swiper('.swiper', {
@@ -187,7 +188,6 @@ function Main(props) {
                 </div>
             </section>
         </main>
-
     );
 }
 
