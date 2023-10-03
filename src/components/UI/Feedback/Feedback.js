@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Navigation } from 'swiper/modules';
+import { Link } from 'react-router-dom';
 
 
 function Feedback(props) {
@@ -56,11 +57,12 @@ function Feedback(props) {
                         commentData.map((value, index) => {
                             return (
                                 <SwiperSlide>
-
+                                    <Link path={'/admin/medicines/:id'} >
                                     <CardBox
                                         title={value.name}
                                         description={value.body}
                                     />
+                                    </Link>
                                 </SwiperSlide>
                             )
                         })
