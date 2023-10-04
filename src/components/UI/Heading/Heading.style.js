@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Heading1 = styled.div`
     font-family: "Raleway", sans-serif;
+    text-align: center;
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 20px;

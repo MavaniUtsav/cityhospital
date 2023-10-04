@@ -4,6 +4,7 @@ import BackBtn from '../../components/UI/BackBtn/BackBtn';
 import OurTeam from '../NestedRouting Comp/OurTeam';
 import Button from '../../components/UI/Button/Button';
 import { Link, Outlet } from 'react-router-dom';
+import AllMedicines from '../Home/AllMedicines';
 
 function About(props) {
     return (

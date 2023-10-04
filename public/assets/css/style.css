@@ -1834,3 +1834,16 @@ section {
   justify-content: center;
   column-gap: 15rem;
 }
+
+#center {
+  text-align: center;
+  width: 60%;
+}
+
+.medicard{
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px #dfdfdf;
+
+}

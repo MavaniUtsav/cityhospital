@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 
 function Feedback(props) {
     const [commentData, setCommentData] = useState([]);
+    
 
     const getData = async () => {
         const response = await fetch('https://jsonplaceholder.typicode.com/comments')
@@ -57,7 +58,7 @@ function Feedback(props) {
                         commentData.map((value, index) => {
                             return (
                                 <SwiperSlide>
-                                    <Link path={'/admin/medicines/:id'} >
+                                    <Link to={'/medicines/' + value.id} >
                                     <CardBox
                                         title={value.name}
                                         description={value.body}

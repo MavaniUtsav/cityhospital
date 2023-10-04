@@ -7,7 +7,7 @@ function AdminRoute(props) {
     return (
         <Routes>
             <Route path='/medicines' element={<Medicines />} />
-            <Route exact path='*' element={<Error />} />
+            {/* <Route exact path='*' element={<Error />} /> */}
         </Routes>
     );
 }
