@@ -58,7 +58,7 @@ function Feedback(props) {
                         commentData.map((value, index) => {
                             return (
                                 <SwiperSlide>
-                                    <Link to={'/medicines/' + value.id} >
+                                    <Link to={'/reviews/' + value.id} >
                                     <CardBox
                                         title={value.name}
                                         description={value.body}

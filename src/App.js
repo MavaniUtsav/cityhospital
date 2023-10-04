@@ -11,14 +11,13 @@ import PrivateRoute from './routes/PrivateRoute';
 function App() {
   return (
     <>
-      <Header />
+      
       <Routes>
         <Route path='/*' element={<UserRoute />} />
         <Route element={<PrivateRoute />}>
           <Route path='/admin/*' element={<AdminRoute />} />
         </Route>
       </Routes>
-      <Footer />
       {/* <ProductPage2 /> */}
     </>
   );

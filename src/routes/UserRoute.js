@@ -12,27 +12,33 @@ import ToDepartment from '../containers/NestedRouting Comp/ToDepartment';
 import Main from '../containers/Home/Home';
 import PrivateRoute from './PrivateRoute';
 import Dept from '../containers/Department/Dept';
-import AllMedicines from '../containers/Home/AllMedicines';
+import AllMedicines from '../containers/Home/ReviewDeatails';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
 
 function UserRoute(props) {
     return (
-        <Routes>
-            <Route exact path='/' element={<Main />} />
-            <Route exact path='/department' element={<Department />}/>
-            <Route exact path='/dept/:id' element={<Dept />} />
-            <Route exact path='/doctor' element={<Doctor />} />
-            <Route exact path='/about/' element={<About />}>
-                <Route path='ourteam' element={<OurTeam />} />
-                <Route path='ourtreatments' element={<ToDepartment />} />
-            </Route>
-            <Route exact path='/contact' element={<Contact />} />
-            <Route exact path='/auth' element={<Auth />} />
-            <Route element={<PrivateRoute />}>
-                <Route exact path='/appointment' element={<Appointment />} />
-            </Route>
-            <Route exact path='/medicines/:id' element={<AllMedicines />} />
-            {/* <Route exact path='*' element={<Error />} /> */}
-        </Routes>
+        <>
+            <Header />
+            <Routes>
+                <Route exact path='/' element={<Main />} />
+                <Route exact path='/department' element={<Department />} />
+                <Route exact path='/dept/:id' element={<Dept />} />
+                <Route exact path='/doctor' element={<Doctor />} />
+                <Route exact path='/about/' element={<About />}>
+                    <Route path='ourteam' element={<OurTeam />} />
+                    <Route path='ourtreatments' element={<ToDepartment />} />
+                </Route>
+                <Route exact path='/contact' element={<Contact />} />
+                <Route exact path='/auth' element={<Auth />} />
+                <Route element={<PrivateRoute />}>
+                    <Route exact path='/appointment' element={<Appointment />} />
+                </Route>
+                <Route exact path='/reviews/:id' element={<AllMedicines />} />
+                <Route exact path='*' element={<Error />} />
+            </Routes>
+            <Footer />
+        </>
     );
 }
 
