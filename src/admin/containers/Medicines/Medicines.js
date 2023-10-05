@@ -35,15 +35,13 @@ function Medicines(props) {
         let localData = JSON.parse(localStorage.getItem('medicines'))
         let id = Math.floor(Math.random() * 1000)
 
-        console.log(localData);
         if (localData) {
-            localData.push(id, ...data)
-            console.log(localData);
-            // localStorage.setItem('medicines', JSON.stringify(localData))
+            localData.push({id, ...data})
+            localStorage.setItem('medicines', JSON.stringify(localData))
         } else {
-            localStorage.setItem('medicines', JSON.stringify([id, ...data]));
+            console.log('hello');
+            localStorage.setItem('medicines', JSON.stringify([id, ...data]))
         }
-        // localStorage.setItem('medicines', JSON.stringify([data]));
 
     }
 
