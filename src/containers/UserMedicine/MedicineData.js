@@ -74,10 +74,12 @@ function MedicineData(props) {
                     if (parseInt(id) === v.id) {
                         return (
                             <div className='revicard'>
+                                <div>
                                 <H1>Medicine: {v.name}</H1>
                                 <Heading4>Price: {v.price + ' ₹'} </Heading4>
                                 <Heading4 className='block'>Expiry: {v.expiry} </Heading4>
                                 <InnerText2>{v.desc}</InnerText2>
+                                </div>
                             </div>
                         )
                     }
