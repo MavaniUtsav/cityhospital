@@ -1847,3 +1847,28 @@ section {
   box-shadow: 0 2px 8px #dfdfdf;
 
 }
+
+#medicinecard {
+  width: 200px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px #dfdfdf;
+  cursor: pointer;
+}
+
+.medi {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 2rem;
+  margin-top: 2rem;
+
+}
+
+.mediproducts {
+  padding: 2rem;
+}
+
+.block {
+  display: block;
+}

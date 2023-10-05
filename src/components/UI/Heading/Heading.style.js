@@ -53,3 +53,12 @@ export const Heading3 = styled.div`
     font-size: 20px;
     color: #2c4964;
 `
+
+export const H1 = styled.div`
+    font-family: "Raleway", sans-serif;
+    text-align: start;
+    font-size: 32px;
+    font-weight: bold;
+    position: relative;
+    color: #2c4964;
+`

@@ -12,9 +12,11 @@ import ToDepartment from '../containers/NestedRouting Comp/ToDepartment';
 import Main from '../containers/Home/Home';
 import PrivateRoute from './PrivateRoute';
 import Dept from '../containers/Department/Dept';
-import AllMedicines from '../containers/Home/ReviewDeatails';
+import ReviewDetails from '../containers/Home/ReviewDeatails';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import Medicine from '../containers/UserMedicine/Medicine';
+import MedicineData from '../containers/UserMedicine/MedicineData';
 
 function UserRoute(props) {
     return (
@@ -30,11 +32,13 @@ function UserRoute(props) {
                     <Route path='ourtreatments' element={<ToDepartment />} />
                 </Route>
                 <Route exact path='/contact' element={<Contact />} />
+                <Route path='/medicine' element={<Medicine />} />
+                <Route path='/medicine/:id' element={<MedicineData />} />
                 <Route exact path='/auth' element={<Auth />} />
                 <Route element={<PrivateRoute />}>
                     <Route exact path='/appointment' element={<Appointment />} />
                 </Route>
-                <Route exact path='/reviews/:id' element={<AllMedicines />} />
+                <Route exact path='/reviews/:id' element={<ReviewDetails />} />
                 <Route exact path='*' element={<Error />} />
             </Routes>
             <Footer />

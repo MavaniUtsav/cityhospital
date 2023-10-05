@@ -4,7 +4,7 @@ import { Heading1 } from '../../components/UI/Heading/Heading.style';
 import { InnerText, InnerText2 } from '../../components/UI/Text/text.style';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
 
-function AllMedicines(props) {
+function ReviewDetails(props) {
     const [medicinesData, setMedicinesData] = useState([]);
     let { id } = useParams()
 
@@ -31,7 +31,7 @@ function AllMedicines(props) {
     );
 }
 
-export default AllMedicines;
+export default ReviewDetails;
 
 
 ////// Second Type to rendering data of Review ///////

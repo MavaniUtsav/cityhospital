@@ -37,6 +37,9 @@ function Header(props) {
                             <li><NavLink to='/doctor' className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             }>Doctors</NavLink></li>
+                            <li><NavLink to='/medicine' className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            }>Medicines</NavLink></li>
                             <li><NavLink to='/about' className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             }>About</NavLink></li>
