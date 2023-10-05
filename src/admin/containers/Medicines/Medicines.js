@@ -36,11 +36,11 @@ function Medicines(props) {
         let id = Math.floor(Math.random() * 1000)
 
         if (localData) {
-            localData.push({id, ...data})
+            localData.push({ id, ...data })
             localStorage.setItem('medicines', JSON.stringify(localData))
         } else {
             console.log('hello');
-            localStorage.setItem('medicines', JSON.stringify([id, ...data]))
+            localStorage.setItem('medicines', JSON.stringify([id,...data]))
         }
 
     }
@@ -180,7 +180,7 @@ function Medicines(props) {
                     <Button onClick={handleSubmit}>Submit</Button>
                 </DialogActions>
             </Dialog>
-            <div style={{ height: 400, width: '100%', marginTop: '15px' }}>
+            <div style={{ height: 400, width: '100%',marginTop: '15px' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
