@@ -88,7 +88,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function Layouts({children}) {
+export default function Layouts({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -101,19 +101,20 @@ export default function Layouts({children}) {
   };
 
   const listItem = [
-    {label: 'Medicines', icon: <MedicalServicesIcon />, to: '/admin/medicines' }
+    { label: 'Medicines', icon: <MedicalServicesIcon />, to: '/admin/medicines' }
   ]
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} style={{ backgroundColor: '#ffffff'}}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
+            style={{ color: '#ff6337ff'}}
             sx={{
               marginRight: 5,
               ...(open && { display: 'none' }),
@@ -121,8 +122,8 @@ export default function Layouts({children}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+          <Typography variant="h6" noWrap component="div" style={{ color: '#2c4964'}}>
+            City Multispeciality Hospital (Admin)
           </Typography>
         </Toolbar>
       </AppBar>
@@ -135,11 +136,11 @@ export default function Layouts({children}) {
         <Divider />
         <List>
           {listItem.map((v, index) => (
-            <ListItem 
-              key={v} 
+            <ListItem
+              key={v}
               disablePadding sx={{ display: 'block' }}
               component={Link}
-              to={v.to}  
+              to={v.to}
             >
               <ListItemButton
                 sx={{

@@ -16,7 +16,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 function Medicines(props) {
     const [open, setOpen] = React.useState(false);
-    const [mData, setMData] = useState([])
+    const [mData, setMData] = useState([]);
+    const [update, setUpdate] = useState(false);
 
     const date = new Date()
     date.setDate(date.getDate() - 1);
@@ -36,7 +37,7 @@ function Medicines(props) {
         description: yup
             .string()
             .min(10)
-            .max(100)
+            .max(1000)
             .required("Please Enter a Description")
     })
 
@@ -50,31 +51,22 @@ function Medicines(props) {
             setMData(localData)
         } else {
             localStorage.setItem('medicines', JSON.stringify([{ id, ...data }]))
-            setMData(localData)
+            setMData([{ id, ...data }])
         }
     }
 
-    const formikObj = useFormik({
-        initialValues: {
-            name: '',
-            price: '',
-            expiry: '',
-            description: ''
-        },
-        onSubmit: values => {
-            handleAdd(values)
-            handleReset()
-            // action.handleReset()
-        },
-        onChange: event => {
-            
-        },
-        validationSchema: medicineSchema
-    })
+    const handleUpdateData = (data) => {
+        let localData = JSON.parse(localStorage.getItem('medicines'))
+        let index = localData.findIndex((v) => v.id === data.id)
 
-    const { handleSubmit, handleBlur, handleChange, handleReset, errors, touched, values } = formikObj;
+        localData[index] = data
 
+        localStorage.setItem('medicines', JSON.stringify(localData))
 
+        setMData(localData)
+
+        setUpdate(false)
+    }
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -90,17 +82,33 @@ function Medicines(props) {
         localStorage.setItem("medicines", JSON.stringify(newList))
     }
 
-    const handleEdit = (id) => {
-        let newList = mData.filter((v, index) => v.id === id);
+    const handleEdit = (data) => {
+        setValues(data)
 
-        newList.map((v, i) => {
-            values.name = v.name
-            values.price = v.price
-            values.expiry = v.expiry
-            values.description = v.description
-        })
-
+        setUpdate(true)
     }
+
+    const formikObj = useFormik({
+        initialValues: {
+            name: '',
+            price: '',
+            expiry: '',
+            description: ''
+        },
+        onSubmit: (values, action) => {
+            if (update) {
+                handleUpdateData(values)
+            } else {
+                handleAdd(values)
+            }
+            action.resetForm()
+            handleClose()
+            // action.handleReset()
+        },
+        validationSchema: medicineSchema
+    })
+
+    const { handleSubmit, handleBlur, handleChange, errors, touched, values, setValues } = formikObj;
 
     const columns = [
         { field: 'name', headerName: 'Medicine Name', width: 140 },
@@ -112,7 +120,7 @@ function Medicines(props) {
                 <strong>
                     <EditIcon id='editico' onClick={() => {
                         handleClickOpen()
-                        handleEdit(params.row.id)
+                        handleEdit(params.row)
                     }} />
                     <DeleteIcon id='deleteico' onClick={() => { handleDelete(params.row.id) }} />
                 </strong>
@@ -128,10 +136,6 @@ function Medicines(props) {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Medicine</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We
-                        will send updates occasionally.
-                    </DialogContentText>
                     <TextField
                         // autoFocus
                         margin="dense"
@@ -193,10 +197,10 @@ function Medicines(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleSubmit}>Submit</Button>
+                    <Button onClick={handleSubmit}>{update ? 'Update' : 'Add'}</Button>
                 </DialogActions>
             </Dialog>
-            <div style={{ height: 400, width: '100%', marginTop: '15px' }}>
+            <div style={{ height: '75vh', width: '100%', marginTop: '15px' }}>
                 <DataGrid
                     rows={mData}
                     columns={columns}
@@ -205,8 +209,8 @@ function Medicines(props) {
                             paginationModel: { page: 0, pageSize: 5 },
                         },
                     }}
-                    pageSizeOptions={[5, 10]}
-                // checkboxSelection
+                    pageSizeOptions={[5, 10, 15, 20]}
+                    checkboxSelection
                 />
             </div>
         </div>
