@@ -66,15 +66,12 @@ function Medicines(props) {
             handleReset()
             // action.handleReset()
         },
-        onChange: event => {
-            
-        },
         validationSchema: medicineSchema
     })
 
     const { handleSubmit, handleBlur, handleChange, handleReset, errors, touched, values } = formikObj;
 
-
+    
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -85,21 +82,34 @@ function Medicines(props) {
     };
 
     const handleDelete = (id) => {
-        let newList = mData.filter((v, index) => v.id !== id);
-        setMData(newList)
-        localStorage.setItem("medicines", JSON.stringify(newList))
+        // console.log('Delete', id);
+        // let newList = mData.filter((Obj) => Obj.id !== id);
+        // setMData(newList);
+        // localStorage.setItem('medicines', JSON.stringify(newList))
+        let localData = JSON.parse(localStorage.getItem('medicines'))
+        let newList;
+
+        mData.map((v, index) => {
+            if (id === v.id) {
+                newList = [...localData].splice(index, 1)
+            }
+        })
+        console.log(newList);
+        localStorage.setItem('medicines', JSON.stringify(newList))
+        // let setItem = mData.filter((v) => id !== v.id)
+
+        // setMData(setItem);
+        // localStorage.setItem("medicines", JSON.stringify(setItem));
     }
 
     const handleEdit = (id) => {
-        let newList = mData.filter((v, index) => v.id === id);
+        console.log('Edit', id);
+        let localData = JSON.parse(localStorage.getItem('medicines'))
+        mData.map((v, index) => {
+            if (id === v.id) {
 
-        newList.map((v, i) => {
-            values.name = v.name
-            values.price = v.price
-            values.expiry = v.expiry
-            values.description = v.description
+            }
         })
-
     }
 
     const columns = [
@@ -109,13 +119,10 @@ function Medicines(props) {
         { field: 'description', headerName: 'Description', width: 300 },
         {
             field: 'action', headerName: 'Action', width: 300, renderCell: (params) => (
-                <strong>
-                    <EditIcon id='editico' onClick={() => {
-                        handleClickOpen()
-                        handleEdit(params.row.id)
-                    }} />
-                    <DeleteIcon id='deleteico' onClick={() => { handleDelete(params.row.id) }} />
-                </strong>
+                <>
+                    <EditIcon id='editico'  />
+                    <DeleteIcon id='deleteico' onClick={handleDelete(params.row.id)} />
+                </>
             )
         },
     ];
@@ -214,23 +221,3 @@ function Medicines(props) {
 }
 
 export default Medicines;
-
-// console.log('Delete', id);
-// let newList = mData.filter((Obj) => Obj.id !== id);
-// setMData(newList);
-// localStorage.setItem('medicines', JSON.stringify(newList))
-// let localData = JSON.parse(localStorage.getItem('medicines'))
-// let newList;
-
-// mData.map((v, index) => {
-//     if (id === v.id) {
-//         newList = [...localData].splice(index, 1)
-//     }
-// })
-// console.log(newList);
-// setMData(newList)
-// localStorage.setItem('medicines', JSON.stringify(newList))
-// let setItem = mData.filter((v) => id !== v.id)
-
-// setMData(setItem);
-// localStorage.setItem("medicines", JSON.stringify(setItem));

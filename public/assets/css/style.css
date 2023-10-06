@@ -1872,3 +1872,13 @@ section {
 .block {
   display: block;
 }
+
+#editico {
+  color: #1976d2;
+  cursor: pointer;
+}
+
+#deleteico {
+  color: red;
+  cursor: pointer;
+}
