@@ -20,6 +20,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import { Link } from 'react-router-dom';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 
 const drawerWidth = 240;
 
@@ -101,20 +102,21 @@ export default function Layouts({ children }) {
   };
 
   const listItem = [
-    { label: 'Medicines', icon: <MedicalServicesIcon />, to: '/admin/medicines' }
+    { label: 'Medicines', icon: <MedicalServicesIcon />, to: '/admin/medicines' },
+    { label: 'Doctors', icon: <LocalHospitalIcon />, to: '/admin/doctors' }
   ]
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} style={{ backgroundColor: '#ffffff'}}>
+      <AppBar position="fixed" open={open} style={{ backgroundColor: '#ffffff' }}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            style={{ color: '#ff6337ff'}}
+            style={{ color: '#ff6337ff' }}
             sx={{
               marginRight: 5,
               ...(open && { display: 'none' }),
@@ -122,7 +124,7 @@ export default function Layouts({ children }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" style={{ color: '#2c4964'}}>
+          <Typography variant="h6" noWrap component="div" style={{ color: '#2c4964' }}>
             City Multispeciality Hospital (Admin)
           </Typography>
         </Toolbar>
