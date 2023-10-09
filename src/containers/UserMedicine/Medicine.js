@@ -45,29 +45,29 @@ function Medicines() {
     const finalData = filterData.length > 0 ? filterData : medicines
 
     return (
-        <>
+        <section id='medicines'>
             <div className='container'>
-                <div id="back">
-                    <BackBtn />
-                </div>
+                <BackBtn />
             </div>
             <div className='container'>
-                <div className='search'> 
-                    <div id='filter'>
-                        <select name="dropdown" id='dropdown' onChange={(e) => handleFilter(e.target.value)}>
-                            <option value="">--   Select   --</option>
-                            <option value="atoz">A to Z</option>
-                            <option value="ztoa">Z to A</option>
-                            <option value="hightolow">Price(High to Low)</option>
-                            <option value="lowtohigh">Price(Low to High)</option>
-                        </select>
-                    </div>
-                    <div className="search__container">
-                        <input className="search__input" type="text" placeholder="Search" onChange={(e) => handleFilter(e.target.value)} />
+                <Heading1>Medicines</Heading1>
+                <div id='back'>
+                    <div className='search'>
+                        <div id='filter'>
+                            <select name="dropdown" id='dropdown' onChange={(e) => handleFilter(e.target.value)}>
+                                <option value="">--   Select   --</option>
+                                <option value="atoz">A to Z</option>
+                                <option value="ztoa">Z to A</option>
+                                <option value="hightolow">Price(High to Low)</option>
+                                <option value="lowtohigh">Price(Low to High)</option>
+                            </select>
+                        </div>
+                        <div className="search__container">
+                            <input className="search__input" type="text" placeholder="Search" onChange={(e) => handleFilter(e.target.value)} />
+                        </div>
                     </div>
                 </div>
                 <div className='mediproducts' >
-                    <Heading1>Medicines</Heading1>
                     <div className='medi'>
                         {
 
@@ -89,7 +89,7 @@ function Medicines() {
                     </div>
                 </div>
             </div>
-        </>
+        </section>
 
     );
 }
