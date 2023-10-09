@@ -52,7 +52,7 @@ function Medicines() {
                 </div>
             </div>
             <div className='container'>
-                <div className='search'>
+                <div className='search'> 
                     <div id='filter'>
                         <select name="dropdown" id='dropdown' onChange={(e) => handleFilter(e.target.value)}>
                             <option value="">--   Select   --</option>
