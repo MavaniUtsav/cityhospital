@@ -70,8 +70,7 @@ function Medicines() {
                 <div className='mediproducts' >
                     <div className='medi'>
                         {
-
-                            finalData.map((v) => {
+                             finalData.map((v) => {
                                 return (
                                     <>
                                         <Link to={'/medicine/' + v.id}>
