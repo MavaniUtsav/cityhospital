@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,8 +10,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-function MedicineForm(props) {
+function MedicineForm({ onHandleSubmit, updateData }) {
     const [open, setOpen] = React.useState(false);
+
+    useEffect(() => {
+        if (updateData) {
+            handleClickOpen()
+            setValues(updateData)
+        }
+    }, [updateData])
 
     const date = new Date()
     date.setDate(date.getDate() - 1);
@@ -48,9 +55,9 @@ function MedicineForm(props) {
             // } else {
             //     handleAdd(values)
             // }
+            onHandleSubmit(values)   //State Up Lifting
             action.resetForm()
             handleClose()
-            // action.handleReset()
         },
         validationSchema: medicineSchema
     })
@@ -126,7 +133,7 @@ function MedicineForm(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleSubmit}>Add</Button>
+                    <Button onClick={handleSubmit}>{updateData ? 'Update' : 'Add'}</Button>
                 </DialogActions>
             </Dialog>
         </>

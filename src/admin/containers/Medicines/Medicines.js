@@ -17,31 +17,39 @@ function Medicines(props) {
         }
     }, [])
 
-    const handleAdd = (data) => {
+    const handleFormSubmit = (data) => {
+        console.log(data);
         let localData = JSON.parse(localStorage.getItem('medicines'))
         let id = Math.floor(Math.random() * 1000)
 
         if (localData) {
-            localData.push({ id, ...data })
-            localStorage.setItem('medicines', JSON.stringify(localData))
-            setMData(localData)
+            if (update) {
+                let index = localData.findIndex((v) => v.id === data.id)
+
+                localData[index] = data
+
+                localStorage.setItem('medicines', JSON.stringify(localData))
+
+                setMData(localData)
+
+                setUpdate(false)
+            } else {
+                localData.push({ id, ...data })
+                localStorage.setItem('medicines', JSON.stringify(localData))
+                setMData(localData)
+            }
         } else {
             localStorage.setItem('medicines', JSON.stringify([{ id, ...data }]))
             setMData([{ id, ...data }])
         }
     }
 
+    const handleAdd = (data) => {
+
+    }
+
     const handleUpdateData = (data) => {
-        let localData = JSON.parse(localStorage.getItem('medicines'))
-        let index = localData.findIndex((v) => v.id === data.id)
 
-        localData[index] = data
-
-        localStorage.setItem('medicines', JSON.stringify(localData))
-
-        setMData(localData)
-
-        setUpdate(false)
     }
 
     const handleDelete = (id) => {
@@ -51,9 +59,7 @@ function Medicines(props) {
     }
 
     const handleEdit = (data) => {
-        // setValues(data)
-
-        setUpdate(true)
+        setUpdate(data)
     }
 
     const columns = [
@@ -64,10 +70,7 @@ function Medicines(props) {
         {
             field: 'action', headerName: 'Action', width: 300, renderCell: (params) => (
                 <strong>
-                    <EditIcon id='editico' onClick={() => {
-                        // handleClickOpen()
-                        handleEdit(params.row)
-                    }} />
+                    <EditIcon id='editico' onClick={() => handleEdit(params.row)} />
                     <DeleteIcon id='deleteico' onClick={() => { handleDelete(params.row.id) }} />
                 </strong>
             )
@@ -76,7 +79,7 @@ function Medicines(props) {
 
     return (
         <div className='container'>
-            <MedicineForm />
+            <MedicineForm onHandleSubmit={handleFormSubmit} updateData={update}/>
             <div style={{ height: '75vh', width: '100%', marginTop: '15px' }}>
                 <DataGrid
                     rows={mData}
