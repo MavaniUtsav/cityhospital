@@ -6,10 +6,28 @@ import BackBtn from '../../components/UI/BackBtn/BackBtn';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
-function Medicines() {
+function Medicines({ increment, favInc }) {
     const [filterData, setFilterData] = useState([])
+    const [wishListItem, setWishListItem] = useState([])
+    const [isFavorited, setIsFavorited] = useState(false)
 
     const medicines = JSON.parse(localStorage.getItem('medicines'))
+
+    const handleAddCart = (event) => {
+        event.preventDefault()
+        console.log('Add');
+        increment((prev) => prev + 1)
+    }
+
+    const handleWishlist = (event) => {
+        event.preventDefault()
+        if (isFavorited) {
+            favInc((prev) => prev - 1)
+        } else {
+            favInc((prev) => prev + 1)
+        }
+        setIsFavorited(!isFavorited)
+    }
 
     const handleFilter = (value) => {
         let secondD;
@@ -77,14 +95,16 @@ function Medicines() {
                                             <MedicinesCard
                                                 title={v.name}
                                                 price={v.price + ' ₹'}
+                                                isButton='Add'
+                                                isWish={isFavorited}
+                                                onHandleCart={handleAddCart}
+                                                onHandleWish={handleWishlist}
                                             />
                                         </Link>
-
                                     </>
                                 )
                             })
                         }
-
                     </div>
                 </div>
             </div>

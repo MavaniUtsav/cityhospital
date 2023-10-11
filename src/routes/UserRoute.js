@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Department from '../containers/Department/Department';
 import Doctor from '../containers/Doctar/Doctor';
@@ -19,9 +19,13 @@ import Medicine from '../containers/UserMedicine/Medicine';
 import MedicineData from '../containers/UserMedicine/MedicineData';
 
 function UserRoute(props) {
+    const [counter, setCounter] = useState(0);
+    const [favCounter, setFavCounter] = useState(0);
+    
     return (
+        
         <>
-            <Header />
+            <Header counter={counter} favCount={favCounter}/>
             <Routes>
                 <Route exact path='/' element={<Main />} />
                 <Route exact path='/department' element={<Department />} />
@@ -32,7 +36,7 @@ function UserRoute(props) {
                     <Route path='ourtreatments' element={<ToDepartment />} />
                 </Route>
                 <Route exact path='/contact' element={<Contact />} />
-                <Route path='/medicine' element={<Medicine />} />
+                <Route path='/medicine' element={<Medicine increment={setCounter} favInc={setFavCounter}/>} />
                 <Route path='/medicine/:id' element={<MedicineData />} />
                 <Route exact path='/auth' element={<Auth />} />
                 <Route element={<PrivateRoute />}>

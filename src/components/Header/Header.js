@@ -1,7 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Badge from "@mui/material/Badge";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-function Header(props) {
+function Header({ counter, favCount }) {
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -53,9 +56,15 @@ function Header(props) {
                         Appointment</NavLink>
                     <NavLink to='/auth' className="appointment-btn scrollto">
                         <span className={({ isActive, isPending }) =>
-                                isActive ? "active" : ""
-                            }>Login/ Signup</span>
+                            isActive ? "active" : ""
+                        }>Login/ Signup</span>
                     </NavLink>
+                    <Badge className='badge' badgeContent={counter} color="primary">
+                        <AddShoppingCartIcon />
+                    </Badge>
+                    <Badge badgeContent={favCount} color="primary">
+                        <FavoriteBorderIcon />
+                    </Badge>
                 </div>
             </header>
         </div>

@@ -1854,7 +1854,6 @@ section {
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0 2px 8px #dfdfdf;
-  cursor: pointer;
 }
 
 .medi {
@@ -1908,6 +1907,7 @@ section {
   /* border-color: #FF6337; */
   /* color: #FF6337; */
   padding: 8px 10px;
+  outline: none;
 }
 
 .search__container {
@@ -1954,4 +1954,40 @@ section {
   border-bottom: 1px solid #575756;
   border-radius: 0;
   background-position: 100% center;
+}
+
+#addcart {
+  margin-top: 10px;
+}
+
+#addcart:hover {
+  background-color: #082744;
+}
+
+.badge {
+  margin: 0 18px;
+  color: #111;
+}
+
+.badge:hover {
+  color: #ff6337ff;
+}
+
+#wishlist {
+  float: right;
+  color: grey;
+}
+
+#fav {
+  color: #ff6337ff;
+}
+
+#wishlist:hover {
+  color: #ff6337ff;
+}
+
+#cardbadges {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
