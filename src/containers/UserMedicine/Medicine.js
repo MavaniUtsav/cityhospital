@@ -6,27 +6,33 @@ import BackBtn from '../../components/UI/BackBtn/BackBtn';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
-function Medicines({ increment, favInc }) {
+function Medicines({ increment, favItem, setFavItem }) {
     const [filterData, setFilterData] = useState([])
-    const [wishListItem, setWishListItem] = useState([])
     const [isFavorited, setIsFavorited] = useState(false)
 
     const medicines = JSON.parse(localStorage.getItem('medicines'))
 
     const handleAddCart = (event) => {
         event.preventDefault()
-        console.log('Add');
+        // console.log(id);
         increment((prev) => prev + 1)
     }
 
-    const handleWishlist = (event) => {
-        event.preventDefault()
-        if (isFavorited) {
-            favInc((prev) => prev - 1)
+    const handleWishlist = (id) => {
+        // event.preventDefault()
+        // if (isFavorited) {
+        //     favInc((prev) => prev - 1)
+        // } else {
+        //     favInc((prev) => prev + 1)
+        // }
+        // setIsFavorited(!isFavorited)
+        if (favItem.includes(id)) {
+            let fData = favItem.filter((v) => v !== id);
+            setFavItem(fData)
         } else {
-            favInc((prev) => prev + 1)
+            setFavItem((prev) => [...prev, id])
         }
-        setIsFavorited(!isFavorited)
+        console.log(favItem);
     }
 
     const handleFilter = (value) => {
@@ -91,16 +97,16 @@ function Medicines({ increment, favInc }) {
                             finalData.map((v) => {
                                 return (
                                     <>
-                                        <Link to={'/medicine/' + v.id}>
-                                            <MedicinesCard
-                                                title={v.name}
-                                                price={v.price + ' ₹'}
-                                                isButton='Add'
-                                                isWish={isFavorited}
-                                                onHandleCart={handleAddCart}
-                                                onHandleWish={handleWishlist}
-                                            />
-                                        </Link>
+                                        {/* <Link to={'/medicine/' + v.id}> */}
+                                        <MedicinesCard
+                                            title={v.name}
+                                            price={v.price + ' ₹'}
+                                            isButton='Add'
+                                            isWish={isFavorited}
+                                            onHandleCart={() => handleAddCart(v.id,event)}
+                                            onHandleWish={() => handleWishlist(v.id,event)}
+                                        />
+                                        {/* </Link> */}
                                     </>
                                 )
                             })

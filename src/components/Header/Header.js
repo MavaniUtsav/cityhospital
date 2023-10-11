@@ -4,7 +4,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Badge from "@mui/material/Badge";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-function Header({ counter, favCount }) {
+function Header({ counter, favItem }) {
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -62,7 +62,7 @@ function Header({ counter, favCount }) {
                     <Badge className='badge' badgeContent={counter} color="primary">
                         <AddShoppingCartIcon />
                     </Badge>
-                    <Badge badgeContent={favCount} color="primary">
+                    <Badge badgeContent={favItem.length} color="primary">
                         <FavoriteBorderIcon />
                     </Badge>
                 </div>

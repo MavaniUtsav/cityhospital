@@ -20,12 +20,13 @@ import MedicineData from '../containers/UserMedicine/MedicineData';
 
 function UserRoute(props) {
     const [counter, setCounter] = useState(0);
-    const [favCounter, setFavCounter] = useState(0);
+    const [favItem, setFavItem] = useState([]);
+
     
     return (
         
         <>
-            <Header counter={counter} favCount={favCounter}/>
+            <Header counter={counter} favItem={favItem}/>
             <Routes>
                 <Route exact path='/' element={<Main />} />
                 <Route exact path='/department' element={<Department />} />
@@ -36,10 +37,10 @@ function UserRoute(props) {
                     <Route path='ourtreatments' element={<ToDepartment />} />
                 </Route>
                 <Route exact path='/contact' element={<Contact />} />
-                <Route path='/medicine' element={<Medicine increment={setCounter} favInc={setFavCounter}/>} />
-                <Route path='/medicine/:id' element={<MedicineData />} />
+                <Route exact path='/medicine' element={<Medicine increment={setCounter} favItem={favItem} setFavItem={setFavItem}/>} />
+                <Route exact path='/medicine/:id' element={<MedicineData />} />
                 <Route exact path='/auth' element={<Auth />} />
-                <Route element={<PrivateRoute />}>
+                <Route exact element={<PrivateRoute />}>
                     <Route exact path='/appointment' element={<Appointment />} />
                 </Route>
                 <Route exact path='/reviews/:id' element={<ReviewDetails />} />

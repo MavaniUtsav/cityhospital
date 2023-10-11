@@ -18,7 +18,7 @@ function MedicinesCard({ title = '', expiry = '', price = '', description = '', 
                         isButton !== '' ? <Button onClick={onHandleCart} id='addcart'>{isButton}</Button> : null
                     }
                     {
-                        isWish === true ? <FavoriteIcon onClick={onHandleWish} id='fav'></FavoriteIcon> : <FavoriteBorderIcon onClick={onHandleWish} id='wishlist'></FavoriteBorderIcon>
+                        isWish === true ? <FavoriteIcon onClick={onHandleWish} id='fav'/> : <FavoriteBorderIcon onClick={onHandleWish} id='wishlist'></FavoriteBorderIcon>
                     }
                 </div>
             </ProductDetail>
