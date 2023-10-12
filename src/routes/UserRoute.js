@@ -18,6 +18,8 @@ import Footer from '../components/Footer/Footer';
 import Medicine from '../containers/UserMedicine/Medicine';
 import MedicineData from '../containers/UserMedicine/MedicineData';
 import StepForm from '../containers/Form/Form';
+import Form2 from '../containers/Form/Form2';
+import FormP from '../containers/Form/FormP';
 
 function UserRoute(props) {
     const [counter, setCounter] = useState(0);
@@ -45,6 +47,8 @@ function UserRoute(props) {
                     <Route exact path='/appointment' element={<Appointment />} />
                 </Route>
                 <Route exact path='/reviews/:id' element={<ReviewDetails />} />
+                <Route path="/formclass" element={<Form2 />} />
+                <Route path="/formpractice" element={<FormP />} />
                 <Route path="/form" element={<StepForm />} />
                 <Route exact path='*' element={<Error />} />
             </Routes>

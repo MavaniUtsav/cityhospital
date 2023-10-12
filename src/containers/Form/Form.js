@@ -13,7 +13,7 @@ function StepForm(props) {
         last_name: '',
         email: '',
         password: '',
-        file: ''
+        file: null
     })
 
     const [currentStep, setCurrentStep] = useState(0);
