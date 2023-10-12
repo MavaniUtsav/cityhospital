@@ -12,13 +12,13 @@ function Medicines({ increment, favItem, setFavItem }) {
 
     const medicines = JSON.parse(localStorage.getItem('medicines'))
 
-    const handleAddCart = (event) => {
+    const handleAddCart = (id,event) => {
         event.preventDefault()
         // console.log(id);
         increment((prev) => prev + 1)
     }
 
-    const handleWishlist = (id) => {
+    const handleWishlist = (id,event) => {
         // event.preventDefault()
         // if (isFavorited) {
         //     favInc((prev) => prev - 1)
@@ -103,8 +103,8 @@ function Medicines({ increment, favItem, setFavItem }) {
                                             price={v.price + ' ₹'}
                                             isButton='Add'
                                             isWish={isFavorited}
-                                            onHandleCart={() => handleAddCart(v.id,event)}
-                                            onHandleWish={() => handleWishlist(v.id,event)}
+                                            onHandleCart={(event) => handleAddCart(v.id,event)}
+                                            onHandleWish={(event) => handleWishlist(v.id,event)}
                                         />
                                         {/* </Link> */}
                                     </>

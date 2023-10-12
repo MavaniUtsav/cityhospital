@@ -1991,3 +1991,15 @@ section {
   justify-content: space-between;
   align-items: baseline;
 }
+
+.formstyle {
+  margin-top: 18px;
+  justify-content: center;
+}
+
+.btn {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  column-gap: 18px;
+}
