@@ -62,7 +62,7 @@ function FormP(props) {
                         handleNextStep()
                         console.log(values);
                         actions.setSubmitting(false);
-                    }, 1000);
+                    }, 2000);
                 }}
             >
                 {({ isSubmitting, values, errors, touched }) => (
