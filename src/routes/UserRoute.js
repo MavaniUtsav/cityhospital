@@ -20,6 +20,7 @@ import MedicineData from '../containers/UserMedicine/MedicineData';
 import StepForm from '../containers/Form/Form';
 import Form2 from '../containers/Form/Form2';
 import FormP from '../containers/Form/FormP';
+import Counter from '../containers/Counter/Counter';
 
 function UserRoute(props) {
     const [counter, setCounter] = useState(0);
@@ -50,6 +51,7 @@ function UserRoute(props) {
                 <Route path="/formclass" element={<Form2 />} />
                 <Route path="/formpractice" element={<FormP />} />
                 <Route path="/form" element={<StepForm />} />
+                <Route path='/redux' element={<Counter />} />
                 <Route exact path='*' element={<Error />} />
             </Routes>
             <Footer />
