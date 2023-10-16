@@ -3,18 +3,19 @@ import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MedicineForm from './MedicineForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteMedicines, getMedicines } from '../../../redux/Action/medicines.action';
 
 
 function Medicines(props) {
     const [mData, setMData] = useState([]);
     const [update, setUpdate] = useState(false);
 
-    useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem('medicines'))
+    const dispatch = useDispatch();
+    const medicines = useSelector(state => state.medicines)
 
-        if (localData) {
-            setMData(localData)
-        }
+    useEffect(() => {
+        dispatch(getMedicines())
     }, [])
 
     const handleFormSubmit = (data) => {
@@ -44,18 +45,11 @@ function Medicines(props) {
         }
     }
 
-    const handleAdd = (data) => {
-
-    }
-
-    const handleUpdateData = (data) => {
-
-    }
-
     const handleDelete = (id) => {
-        let newList = mData.filter((v, index) => v.id !== id);
-        setMData(newList)
-        localStorage.setItem("medicines", JSON.stringify(newList))
+        // let newList = mData.filter((v, index) => v.id !== id);
+        // setMData(newList)
+        // localStorage.setItem("medicines", JSON.stringify(newList))
+        dispatch(deleteMedicines(id))
     }
 
     const handleEdit = (data) => {
@@ -66,7 +60,7 @@ function Medicines(props) {
         { field: 'name', headerName: 'Medicine Name', width: 140 },
         { field: 'price', headerName: 'Price', width: 100 },
         { field: 'expiry', headerName: 'Expiry', width: 120 },
-        { field: 'description', headerName: 'Description', width: 300 },
+        { field: 'desc', headerName: 'Description', width: 300 },
         {
             field: 'action', headerName: 'Action', width: 300, renderCell: (params) => (
                 <strong>
@@ -82,7 +76,7 @@ function Medicines(props) {
             <MedicineForm onHandleSubmit={handleFormSubmit} updateData={update}/>
             <div style={{ height: '75vh', width: '100%', marginTop: '15px' }}>
                 <DataGrid
-                    rows={mData}
+                    rows={medicines.medicines}
                     columns={columns}
                     initialState={{
                         pagination: {
