@@ -46,14 +46,11 @@ function Medicines(props) {
     }
 
     const handleDelete = (id) => {
-        // let newList = mData.filter((v, index) => v.id !== id);
-        // setMData(newList)
-        // localStorage.setItem("medicines", JSON.stringify(newList))
         dispatch(deleteMedicines(id))
     }
 
     const handleEdit = (data) => {
-        setUpdate(data)
+        
     }
 
     const columns = [
