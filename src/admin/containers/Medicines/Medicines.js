@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MedicineForm from './MedicineForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteMedicines, getMedicines } from '../../../redux/Action/medicines.action';
+import { deleteMedicines, firstAddMedicines, getMedicines } from '../../../redux/Action/medicines.action';
 
 
 function Medicines(props) {
@@ -40,8 +40,9 @@ function Medicines(props) {
                 setMData(localData)
             }
         } else {
-            localStorage.setItem('medicines', JSON.stringify([{ id, ...data }]))
-            setMData([{ id, ...data }])
+            // localStorage.setItem('medicines', JSON.stringify([{ id, ...data }]))
+            // setMData([{ id, ...data }])
+            dispatch(firstAddMedicines(data))
         }
     }
 

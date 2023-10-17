@@ -23,3 +23,20 @@ export const deleteMedicines = (id) => (dispatch) => {
         console.log(error);
     }
 }
+
+export const firstAddMedicines = (dataN) => (dispatch) => {
+    try {
+        fetch(API_URL + '/medicines', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(),
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(dataN))
+            .then((error) => console.log(error))
+    } catch (error) {
+        console.log(error);
+    }
+}
