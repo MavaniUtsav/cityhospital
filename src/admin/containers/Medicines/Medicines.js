@@ -4,12 +4,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MedicineForm from './MedicineForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteMedicines, firstAddMedicines, getMedicines } from '../../../redux/Action/medicines.action';
+import { deleteMedicines, addMedicines, getMedicines, updateMedicines } from '../../../redux/Action/medicines.action';
+import { API_URL } from '../../../Utilities/Api-url';
 
 
 function Medicines(props) {
     const [mData, setMData] = useState([]);
-    const [update, setUpdate] = useState(false);
+    const [update, setUpdate] = useState(null);
 
     const dispatch = useDispatch();
     const medicines = useSelector(state => state.medicines)
@@ -19,31 +20,13 @@ function Medicines(props) {
     }, [])
 
     const handleFormSubmit = (data) => {
-        console.log(data);
-        let localData = JSON.parse(localStorage.getItem('medicines'))
-        let id = Math.floor(Math.random() * 1000)
 
-        if (localData) {
-            if (update) {
-                let index = localData.findIndex((v) => v.id === data.id)
-
-                localData[index] = data
-
-                localStorage.setItem('medicines', JSON.stringify(localData))
-
-                setMData(localData)
-
-                setUpdate(false)
-            } else {
-                localData.push({ id, ...data })
-                localStorage.setItem('medicines', JSON.stringify(localData))
-                setMData(localData)
-            }
+        if (update) {
+            dispatch(updateMedicines(data))
         } else {
-            // localStorage.setItem('medicines', JSON.stringify([{ id, ...data }]))
-            // setMData([{ id, ...data }])
-            dispatch(firstAddMedicines(data))
+            dispatch(addMedicines(data))
         }
+
     }
 
     const handleDelete = (id) => {
@@ -51,7 +34,7 @@ function Medicines(props) {
     }
 
     const handleEdit = (data) => {
-        
+        setUpdate(data)
     }
 
     const columns = [
@@ -71,7 +54,7 @@ function Medicines(props) {
 
     return (
         <div className='container'>
-            <MedicineForm onHandleSubmit={handleFormSubmit} updateData={update}/>
+            <MedicineForm onHandleSubmit={handleFormSubmit} updateData={update} />
             <div style={{ height: '75vh', width: '100%', marginTop: '15px' }}>
                 <DataGrid
                     rows={medicines.medicines}
@@ -86,8 +69,9 @@ function Medicines(props) {
                 />
             </div>
         </div>
-    );
-}
+    )
+};
+
 
 export default Medicines;
 
