@@ -5,6 +5,7 @@ import Layouts from '../admin/containers/component/Layouts';
 import DialogForm from '../admin/containers/component/DialogForm';
 import Medicines from '../admin/containers/Medicines/Medicines';
 import Doctors from '../admin/containers/Doctors/Doctors';
+import Departments from '../admin/containers/Departments/Departments';
 
 function AdminRoute(props) {
     return (
@@ -12,6 +13,7 @@ function AdminRoute(props) {
         <Routes>
             <Route path='/medicines' element={<Medicines />} />
             <Route path='/doctors' element={<Doctors />} />
+            <Route path='/departments' element={<Departments />} />
             {/* <Route path='/medicine/:id' element={<DialogForm />} /> */}
             {/* <Route exact path='*' element={<Error />} /> */}
         </Routes>

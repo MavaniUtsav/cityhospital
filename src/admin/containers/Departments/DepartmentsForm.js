@@ -10,7 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-function MedicineForm({ onHandleSubmit, updateData }) {
+function DepartmentsForm({ onHandleSubmit, updateData }) {
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
@@ -20,16 +20,12 @@ function MedicineForm({ onHandleSubmit, updateData }) {
         }
     }, [updateData])
 
-    const date = new Date()
-    date.setDate(date.getDate() - 1);
-
-    const medicineSchema = yup.object().shape({
+    const departmentSchema = yup.object().shape({
         name: yup.string().required(),
-        price: yup.number().required().test('price', '*The number must be greater then 0!', (value) => value > 0),
-        expiry: yup.date().required().min(date, '*Past date not allowed'),
-        desc: yup
+        short_desc: yup.string().required().min(25, "Minimum 25 charachter required"),
+        long_desc: yup
             .string()
-            .min(10)
+            .min(35)
             .max(1000)
             .required("Please Enter a Description")
     })
@@ -45,9 +41,8 @@ function MedicineForm({ onHandleSubmit, updateData }) {
     const formikObj = useFormik({
         initialValues: {
             name: '',
-            price: '',
-            expiry: '',
-            desc: ''
+            short_desc: '',
+            long_desc: ''
         },
         onSubmit: (values, action) => {
             // if (update) {
@@ -55,11 +50,12 @@ function MedicineForm({ onHandleSubmit, updateData }) {
             // } else {
             //     handleAdd(values)
             // }
+            console.log(values);
             onHandleSubmit(values)   //State Up Lifting
             action.resetForm()
             handleClose()
         },
-        validationSchema: medicineSchema
+        validationSchema: departmentSchema
     })
 
     const { handleSubmit, handleBlur, handleChange, errors, touched, values, setValues } = formikObj;
@@ -67,16 +63,16 @@ function MedicineForm({ onHandleSubmit, updateData }) {
     return (
         <>
             <Button variant="outlined" onClick={handleClickOpen}>
-                Add Medicine
+                Add Department
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Medicine</DialogTitle>
+                <DialogTitle>Departments</DialogTitle>
                 <DialogContent>
                     <TextField
                         // autoFocus
                         margin="dense"
                         id="name"
-                        label="Medicine Name"
+                        label="Department Name"
                         type="text"
                         fullWidth
                         variant="standard"
@@ -90,45 +86,30 @@ function MedicineForm({ onHandleSubmit, updateData }) {
                         // autoFocus
                         margin="dense"
                         id="name"
-                        label="Price"
-                        type="number"
-                        fullWidth
-                        variant="standard"
-                        name='price'
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.price}
-                    />
-                    {errors.price && touched.price ? <span className='error'>{errors.price}</span> : null}
-                    <TextField
-                        // autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Expiry"
-                        type="date"
-                        fullWidth
-                        variant="standard"
-                        name='expiry'
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.expiry}
-                    />
-                    {errors.expiry && touched.expiry ? <span className='error'>{errors.expiry}</span> : null}
-
-                    <TextField
-                        // autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Description"
+                        label="Short Description"
                         type="text"
                         fullWidth
                         variant="standard"
-                        name='desc'
+                        name='short_desc'
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        value={values.desc}
+                        value={values.short_desc}
                     />
-                    {errors.desc && touched.desc ? <span className='error'>{errors.desc}</span> : null}
+                    {errors.short_desc && touched.short_desc ? <span className='error'>{errors.short_desc}</span> : null}
+                    <TextField
+                        // autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Long Description"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        name='long_desc'
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.long_desc}
+                    />
+                    {errors.long_desc && touched.long_desc ? <span className='error'>{errors.long_desc}</span> : null}
 
                 </DialogContent>
                 <DialogActions>
@@ -140,4 +121,4 @@ function MedicineForm({ onHandleSubmit, updateData }) {
     );
 }
 
-export default MedicineForm;
+export default DepartmentsForm;

@@ -21,6 +21,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import { Link } from 'react-router-dom';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 const drawerWidth = 240;
 
@@ -103,7 +104,8 @@ export default function Layouts({ children }) {
 
   const listItem = [
     { label: 'Medicines', icon: <MedicalServicesIcon />, to: '/admin/medicines' },
-    { label: 'Doctors', icon: <LocalHospitalIcon />, to: '/admin/doctors' }
+    { label: 'Doctors', icon: <LocalHospitalIcon />, to: '/admin/doctors' },
+    { label: 'Departments', icon: <ApartmentIcon />, to: '/admin/departments' }
   ]
 
   return (

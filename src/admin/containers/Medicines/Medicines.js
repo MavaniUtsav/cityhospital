@@ -9,7 +9,6 @@ import { API_URL } from '../../../Utilities/Api-url';
 
 
 function Medicines(props) {
-    const [mData, setMData] = useState([]);
     const [update, setUpdate] = useState(null);
 
     const dispatch = useDispatch();

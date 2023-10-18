@@ -42,10 +42,9 @@ export const addMedicines = (data) => (dispatch) => {
 }
 
 export const updateMedicines = (data) => (dispatch) => {
-    console.log(data);
     try {
         fetch(API_URL + '/medicines/' + data.id, {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
