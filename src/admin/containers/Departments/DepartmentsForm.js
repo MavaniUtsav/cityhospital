@@ -50,7 +50,6 @@ function DepartmentsForm({ onHandleSubmit, updateData }) {
             // } else {
             //     handleAdd(values)
             // }
-            console.log(values);
             onHandleSubmit(values)   //State Up Lifting
             action.resetForm()
             handleClose()

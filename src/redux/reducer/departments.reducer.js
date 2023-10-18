@@ -26,7 +26,7 @@ export const departmentsReducer = (state=initialState, action) => {
         case ADD_DEPARTMENTS:
             return {
                 ...state,
-                departments: action.payLoad
+                departments: state.departments.concat(action.payLoad)
             }    
             
         case UPDATE_DEPARTMENTS:

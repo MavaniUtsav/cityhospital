@@ -29,6 +29,7 @@ export const deleteDepartment = (id) => (dispatch) => {
 }
 
 export const addDepartments = (data) => (dispatch) => {
+    console.log(data);
     try {
         fetch(API_URL + '/departments', {
             method: "POST",
@@ -38,7 +39,7 @@ export const addDepartments = (data) => (dispatch) => {
             body: JSON.stringify(data)
         })
             .then((response) => response.json())
-            .then((data) => dispatch({type: ADD_DEPARTMENTS, payLoad: data }))
+            .then((rdata) => dispatch({type: ADD_DEPARTMENTS, payLoad: rdata }))
             .then((error) => console.log(error))
     } catch (error) {
         console.log(error);

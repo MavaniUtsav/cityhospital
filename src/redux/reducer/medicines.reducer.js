@@ -8,7 +8,6 @@ const initialState = {
 
 
 export const medicinesReducer = (state=initialState, action) => {
-    console.log(action);
 
     switch (action.type) {
         case GET_MEDICINES:
