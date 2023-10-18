@@ -1,4 +1,4 @@
-import { ADD_MEDICINES, DELETE_MEDICINE, GET_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
+import { ADD_MEDICINES, DELETE_MEDICINE, GET_MEDICINES, LOADING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 
 const initialState = {
     isLoading: false,
@@ -10,10 +10,18 @@ const initialState = {
 export const medicinesReducer = (state=initialState, action) => {
 
     switch (action.type) {
+        case LOADING_MEDICINES:
+            return {
+                isLoading: true,
+                medicines: [],
+                error: null
+            }
+
         case GET_MEDICINES:
             return {
-                ...state,
-                medicines: action.payLoad
+                isLoading: false,
+                medicines: action.payLoad,
+                error: null
             }
 
         case DELETE_MEDICINE:

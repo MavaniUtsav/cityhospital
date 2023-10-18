@@ -69,6 +69,24 @@
       "short_desc": "Vestibulum volutpat luctus quam sed finibus. Sed luctus odio eget ex posuere hendrerit. Donec iaculis nisi ut purus dapibus",
       "long_desc": "Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque.",
       "id": 2
+    },
+    {
+      "name": "Physiotherapy",
+      "short_desc": "Fusce placerat ornare enim sed varius. Mauris tortor diam, molestie eget vulputate a, facilisis quis nibh. Donec blandit efficitur nulla",
+      "long_desc": "Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque.",
+      "id": 3
+    },
+    {
+      "name": "Dental",
+      "short_desc": "sollicitudin sed est. Vestibulum volutpat luctus quam sed finibus. Sed luctus odio eget ex posuere hendrerit. Donec iaculis nisi ut purus.",
+      "long_desc": "Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque.",
+      "id": 4
+    },
+    {
+      "name": "Neurosurgery",
+      "short_desc": "Aliquam sed convallis libero. Proin in mi tempor, convallis lectus sed, convallis mauris. Quisque ac nulla et lorem ultricies vulputate.",
+      "long_desc": "Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque.",
+      "id": 5
     }
   ]
 }

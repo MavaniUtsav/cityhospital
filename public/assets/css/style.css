@@ -2041,3 +2041,7 @@ section {
   padding: 40px 0;
   background: transparent;
 }
+
+#loading {
+  margin: 0 auto;
+}

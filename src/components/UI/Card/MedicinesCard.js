@@ -5,7 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
-function MedicinesCard({ title = '', expiry = '', price = '', description = '', isButton = '', isWish = '', onHandleCart, onHandleWish }) {
+function MedicinesCard({ title = '', expiry = '', price = '', description = '', isButton = '', isWish, onHandleCart, onHandleWish }) {
     return (
         <>
             <ProductDetail id='medicinecard'>

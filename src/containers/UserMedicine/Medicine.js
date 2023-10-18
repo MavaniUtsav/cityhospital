@@ -1,72 +1,74 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MedicinesCard from '../../components/UI/Card/MedicinesCard';
 import { Link, useParams } from 'react-router-dom';
 import { Heading1 } from '../../components/UI/Heading/Heading.style';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { API_URL } from '../../Utilities/Api-url';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMedicines } from '../../redux/Action/medicines.action';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 
 function Medicines({ increment, favItem, setFavItem }) {
     const [filterData, setFilterData] = useState([])
     const [isFavorited, setIsFavorited] = useState(false)
 
-    const medicines = JSON.parse(localStorage.getItem('medicines'))
+    const dispatch = useDispatch()
+    const medicines = useSelector(state => state.medicines)
+    console.log(medicines.isLoading);
 
-    const handleAddCart = (id,event) => {
+    useEffect(() => {
+        dispatch(getMedicines())
+    }, [])
+
+    const handleAddCart = (id, event) => {
         event.preventDefault()
-        // console.log(id);
         increment((prev) => prev + 1)
     }
 
-    const handleWishlist = (id,event) => {
-        // event.preventDefault()
-        // if (isFavorited) {
-        //     favInc((prev) => prev - 1)
-        // } else {
-        //     favInc((prev) => prev + 1)
-        // }
-        // setIsFavorited(!isFavorited)
+    const handleWishlist = (id, event) => {
+        event.preventDefault()
+
         if (favItem.includes(id)) {
             let fData = favItem.filter((v) => v !== id);
             setFavItem(fData)
         } else {
             setFavItem((prev) => [...prev, id])
         }
-        console.log(favItem);
     }
 
     const handleFilter = (value) => {
         let secondD;
 
-        secondD = medicines.filter((v) => {
+        secondD = medicines.medicines.filter((v) => {
             return (
-                // console.log(v)
-                v.name.toLowerCase().includes(value.toLowerCase()) || v.description.toLowerCase().includes(value.toLowerCase())
+                v.name.toLowerCase().includes(value.toLowerCase()) || v.desc.toLowerCase().includes(value.toLowerCase())
             )
         })
 
         switch (value) {
             case 'lowtohigh':
-                secondD = [...medicines].sort((a, b) => a.price - b.price);
+                secondD = [...medicines.medicines].sort((a, b) => a.price - b.price);
                 break;
 
             case 'hightolow':
-                secondD = [...medicines].sort((a, b) => b.price - a.price);
+                secondD = [...medicines.medicines].sort((a, b) => b.price - a.price);
                 break;
 
             case 'atoz':
-                secondD = [...medicines].sort((a, b) => a.name > b.name ? 1 : -1);
+                secondD = [...medicines.medicines].sort((a, b) => a.name > b.name ? 1 : -1);
                 break;
 
             case 'ztoa':
-                secondD = [...medicines].sort((a, b) => a.name > b.name ? -1 : 1);
+                secondD = [...medicines.medicines].sort((a, b) => a.name > b.name ? -1 : 1);
         }
 
-        console.log(secondD);
         setFilterData(secondD)
     }
 
-    const finalData = filterData.length > 0 ? filterData : medicines
+    const finalData = filterData.length > 0 ? filterData : medicines.medicines
 
     return (
         <section id='medicines'>
@@ -94,22 +96,26 @@ function Medicines({ increment, favItem, setFavItem }) {
                 <div className='mediproducts' >
                     <div className='medi'>
                         {
-                            finalData.map((v) => {
-                                return (
-                                    <>
-                                        {/* <Link to={'/medicine/' + v.id}> */}
-                                        <MedicinesCard
-                                            title={v.name}
-                                            price={v.price + ' ₹'}
-                                            isButton='Add'
-                                            isWish={isFavorited}
-                                            onHandleCart={(event) => handleAddCart(v.id,event)}
-                                            onHandleWish={(event) => handleWishlist(v.id,event)}
-                                        />
-                                        {/* </Link> */}
-                                    </>
-                                )
-                            })
+                            medicines.isLoading ? 
+                                <div id='loading'>
+                                    <CircularProgress />
+                                </div> :
+                                finalData.map((v) => {
+                                    return (
+                                        <>
+                                            <Link to={'/medicine/' + v.id}>
+                                                <MedicinesCard
+                                                    title={v.name}
+                                                    price={v.price + ' ₹'}
+                                                    isButton='Add'
+                                                    isWish={favItem.includes(v.id) ? true : false}
+                                                    onHandleCart={(event) => handleAddCart(v.id, event)}
+                                                    onHandleWish={(event) => handleWishlist(v.id, event)}
+                                                />
+                                            </Link>
+                                        </>
+                                    )
+                                })
                         }
                     </div>
                 </div>

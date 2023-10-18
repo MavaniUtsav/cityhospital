@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Heading1, SubHeading } from '../../components/UI/Heading/Heading.style';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
+import { getDepartments } from '../../redux/Action/departments.action';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Department(props) {
+    const dispatch = useDispatch()
+    const departments = useSelector(state => state.departments)
+
+    useEffect(() => {
+        dispatch(getDepartments())
+    }, [])
+
     return (
         <section id="departments" className="departments">
             <div className="container">
@@ -50,7 +59,7 @@ function Department(props) {
                             <div className="tab-pane" id="tab-2">
                                 <div className="row">
                                     <div className="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Cancer</h3>
+                                        <SubHeading>Cancer</SubHeading>
                                         <p className="fst-italic">Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna
                                             augue, posuere ut pellentesque quis, cursus ac neque.</p>
                                         <p>Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit,
@@ -107,6 +116,9 @@ function Department(props) {
                                     </div>
                                 </div>
                             </div>
+                            {
+
+                            }
                         </div>
                     </div>
                 </div>
