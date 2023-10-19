@@ -6,6 +6,8 @@ import MedicineForm from './MedicineForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMedicines, addMedicines, getMedicines, updateMedicines } from '../../../redux/Action/medicines.action';
 import { API_URL } from '../../../Utilities/Api-url';
+import CircularProgress from '@mui/material/CircularProgress';
+import { Alert, AlertTitle } from '@mui/material';
 
 
 function Medicines(props) {
@@ -53,20 +55,39 @@ function Medicines(props) {
 
     return (
         <div className='container'>
-            <MedicineForm onHandleSubmit={handleFormSubmit} updateData={update} />
-            <div style={{ height: '75vh', width: '100%', marginTop: '15px' }}>
-                <DataGrid
-                    rows={medicines.medicines}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: { page: 0, pageSize: 5 },
-                        },
-                    }}
-                    pageSizeOptions={[5, 10, 15, 20]}
-                    checkboxSelection
-                />
-            </div>
+
+            {
+
+                medicines.isLoading ?
+                    <div id='loading'>
+                        <CircularProgress />
+                    </div> :
+                    medicines.error ?
+                        <Alert severity="error" id='loading'>
+                            <AlertTitle>Error</AlertTitle>
+                            This is an error alert — <strong>{medicines.error}</strong>
+                        </Alert> :
+                        <>
+                            <MedicineForm onHandleSubmit={handleFormSubmit} updateData={update} />
+                            <div style={{ height: '75vh', width: '100%', marginTop: '15px' }}>
+                                <DataGrid
+                                    rows={medicines.medicines}
+                                    columns={columns}
+                                    initialState={{
+                                        pagination: {
+                                            paginationModel: { page: 0, pageSize: 5 },
+                                        },
+                                    }}
+                                    pageSizeOptions={[5, 10, 15, 20]}
+                                    checkboxSelection
+                                />
+                            </div>
+                        </>
+            }
+            <Alert severity="error" id='loading'>
+                <AlertTitle>Error</AlertTitle>
+                This is an error alert — <strong>{medicines.error}</strong>
+            </Alert>
         </div>
     )
 };

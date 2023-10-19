@@ -11,6 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import { addToCart } from '../../redux/Action/cart.action';
 
 
 function Medicines({ increment, favItem, setFavItem }) {
@@ -20,6 +21,9 @@ function Medicines({ increment, favItem, setFavItem }) {
     const dispatch = useDispatch()
     const medicines = useSelector(state => state.medicines)
     console.log(medicines);
+    
+    const cart = useSelector(state => state.cart)
+    console.log(cart);
 
     useEffect(() => {
         dispatch(getMedicines())
@@ -27,7 +31,7 @@ function Medicines({ increment, favItem, setFavItem }) {
 
     const handleAddCart = (id, event) => {
         event.preventDefault()
-        increment((prev) => prev + 1)
+        dispatch(addToCart(id))
     }
 
     const handleWishlist = (id, event) => {

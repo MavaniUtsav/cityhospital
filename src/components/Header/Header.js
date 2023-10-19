@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Badge from "@mui/material/Badge";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -59,9 +59,12 @@ function Header({ counter, favItem }) {
                             isActive ? "active" : ""
                         }>Login/ Signup</span>
                     </NavLink>
-                    <Badge className='badge' badgeContent={counter} color="primary">
-                        <AddShoppingCartIcon />
-                    </Badge>
+
+                    <Link to='/cart'>
+                        <Badge className='badge' badgeContent={counter} color="primary">
+                            <AddShoppingCartIcon />
+                        </Badge>
+                    </Link>
                     <Badge badgeContent={favItem.length} color="primary">
                         <FavoriteBorderIcon />
                     </Badge>

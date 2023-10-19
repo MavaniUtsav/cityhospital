@@ -55,6 +55,13 @@
       "price": 85,
       "expiry": "2023-12-25",
       "desc": "Orlistat, sold under the brand name Xenical among others, is a medication used to treat obesity. Its primary function is preventing the absorption of fats from the human diet by acting as a lipase inhibitor, thereby reducing caloric intake."
+    },
+    {
+      "name": "Utsav Mavani",
+      "price": 225,
+      "expiry": "2023-10-22",
+      "desc": "asdrftghjy",
+      "id": 9
     }
   ],
   "departments": [

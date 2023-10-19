@@ -7,7 +7,6 @@ export const getMedicines = () => (dispatch) => {
         return setTimeout(function () {
             fetch(API_URL + '/medicines')
                 .then((response) => {
-                    console.log(response);
                     if (!response.ok) {
                         throw 'Something went Wrong!!  ' + response.status;
                     } else{
@@ -16,7 +15,7 @@ export const getMedicines = () => (dispatch) => {
                 })
                 .then((data) => dispatch({ type: GET_MEDICINES, payLoad: data }))
                 .catch((error) => dispatch(errorMedicines(error)))
-        }, 2000)
+        }, 1000)
     } catch (error) {
         dispatch(errorMedicines(error))
     }
@@ -35,20 +34,29 @@ export const deleteMedicines = (id) => (dispatch) => {
 }
 
 export const addMedicines = (data) => (dispatch) => {
-    console.log(data);
     try {
-        fetch(API_URL + '/medicines', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        })
-            .then((response) => response.json())
-            .then((data) => dispatch({ type: ADD_MEDICINES, payLoad: data }))
-            .then((error) => console.log(error))
+        dispatch(loadingMedicines())
+        return setTimeout (function () {
+            fetch(API_URL + '/medicnes', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+            })
+                .then((response) => {
+                    console.log(response);
+                    if (!response.ok) {
+                        throw 'Something went Wrong!!  ' + response.status;
+                    } else {
+                        return response.json
+                    }
+                })
+                .then((data) => dispatch({ type: ADD_MEDICINES, payLoad: data }))
+                .then((error) => dispatch(errorMedicines(error)))
+        }, 1000)
     } catch (error) {
-        console.log(error);
+        dispatch(errorMedicines(error))
     }
 }
 
