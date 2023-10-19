@@ -1,16 +1,24 @@
 import { API_URL, DELETE_URL } from "../../Utilities/Api-url"
-import { ADD_MEDICINES, DELETE_MEDICINE, GET_MEDICINES, LOADING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
+import { ADD_MEDICINES, DELETE_MEDICINE, ERROR_MEDICINES, GET_MEDICINES, LOADING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 
 export const getMedicines = () => (dispatch) => {
     try {
-        dispatch(loadingMedicines()) 
+        dispatch(loadingMedicines())
         return setTimeout(function () {
             fetch(API_URL + '/medicines')
-                .then((response) => response.json())
+                .then((response) => {
+                    console.log(response);
+                    if (!response.ok) {
+                        throw 'Something went Wrong!!  ' + response.status;
+                    } else{
+                        return response.json()
+                    }
+                })
                 .then((data) => dispatch({ type: GET_MEDICINES, payLoad: data }))
+                .catch((error) => dispatch(errorMedicines(error)))
         }, 2000)
     } catch (error) {
-        console.log(error);
+        dispatch(errorMedicines(error))
     }
 }
 
@@ -63,4 +71,8 @@ export const updateMedicines = (data) => (dispatch) => {
 
 export const loadingMedicines = () => (dispatch) => {
     dispatch({ type: LOADING_MEDICINES })
+}
+
+export const errorMedicines = (error) => (dispatch) => {
+    dispatch({ type: ERROR_MEDICINES, payLoad: error })
 }

@@ -1,4 +1,4 @@
-import { ADD_MEDICINES, DELETE_MEDICINE, GET_MEDICINES, LOADING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
+import { ADD_MEDICINES, DELETE_MEDICINE, ERROR_MEDICINES, GET_MEDICINES, LOADING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 
 const initialState = {
     isLoading: false,
@@ -8,8 +8,16 @@ const initialState = {
 
 
 export const medicinesReducer = (state=initialState, action) => {
+    console.log(action);
 
     switch (action.type) {
+        case ERROR_MEDICINES:
+            return{
+                isLoading: false,
+                medicines: [],
+                error: action.payLoad
+            }
+
         case LOADING_MEDICINES:
             return {
                 isLoading: true,

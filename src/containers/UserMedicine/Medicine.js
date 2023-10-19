@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMedicines } from '../../redux/Action/medicines.action';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 
 function Medicines({ increment, favItem, setFavItem }) {
@@ -17,7 +19,7 @@ function Medicines({ increment, favItem, setFavItem }) {
 
     const dispatch = useDispatch()
     const medicines = useSelector(state => state.medicines)
-    console.log(medicines.isLoading);
+    console.log(medicines);
 
     useEffect(() => {
         dispatch(getMedicines())
@@ -95,8 +97,12 @@ function Medicines({ increment, favItem, setFavItem }) {
                 </div>
                 <div className='mediproducts' >
                     <div className='medi'>
-                        {
-                            medicines.isLoading ? 
+                        {medicines.error ?
+                            <Alert severity="error" id='loading'>
+                                <AlertTitle>Error</AlertTitle>
+                                This is an error alert — <strong>{medicines.error}</strong>
+                            </Alert> :
+                            medicines.isLoading ?
                                 <div id='loading'>
                                     <CircularProgress />
                                 </div> :
