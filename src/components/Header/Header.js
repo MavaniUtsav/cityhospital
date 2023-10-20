@@ -3,8 +3,19 @@ import { Link, NavLink } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Badge from "@mui/material/Badge";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useSelector } from 'react-redux';
 
 function Header({ counter, favItem }) {
+    // const [qty, setQty] = useState
+    const cart = useSelector(state => state.cart)
+    let qty = 0;
+
+    cart.cart.map((v) => {
+        qty += v.qty
+    })
+
+    console.log(qty);
+
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -61,7 +72,7 @@ function Header({ counter, favItem }) {
                     </NavLink>
 
                     <Link to='/cart'>
-                        <Badge className='badge' badgeContent={counter} color="primary">
+                        <Badge className='badge' badgeContent={qty} color="primary">
                             <AddShoppingCartIcon />
                         </Badge>
                     </Link>
