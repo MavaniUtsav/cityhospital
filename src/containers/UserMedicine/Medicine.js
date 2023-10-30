@@ -21,7 +21,7 @@ function Medicines({ increment, favItem, setFavItem }) {
     const dispatch = useDispatch()
     const medicines = useSelector(state => state.medicines)
     console.log(medicines);
-    
+
     const cart = useSelector(state => state.cart)
     console.log(cart);
 
@@ -109,7 +109,8 @@ function Medicines({ increment, favItem, setFavItem }) {
                             medicines.isLoading ?
                                 <div id='loading'>
                                     <CircularProgress />
-                                </div> :
+                                </div>
+                                :
                                 finalData.map((v) => {
                                     return (
                                         <>
