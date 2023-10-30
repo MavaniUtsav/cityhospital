@@ -11,7 +11,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import { addToCart } from '../../redux/Action/cart.action';
+import { addToCart } from '../../redux/slice/cart.slice';
+// import { addToCart } from '../../redux/Action/cart.action';
 
 
 function Medicines({ increment, favItem, setFavItem }) {
