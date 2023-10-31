@@ -1,7 +1,7 @@
 import React from 'react';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrementQty, incrementQty, removeItem } from '../../redux/Action/cart.action';
+import { decrementQty, incrementQty, removeItem } from '../../redux/slice/cart.slice';
 
 function Cart(props) {
     const medicines = useSelector(state => state.medicines)

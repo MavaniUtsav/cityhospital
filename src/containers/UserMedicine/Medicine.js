@@ -32,7 +32,7 @@ function Medicines({ increment, favItem, setFavItem }) {
 
     const handleAddCart = (id, event) => {
         event.preventDefault()
-        dispatch(addToCart(id))
+        dispatch(addToCart({id, qty: 1}))
     }
 
     const handleWishlist = (id, event) => {

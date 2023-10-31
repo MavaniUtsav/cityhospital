@@ -14,7 +14,7 @@ function Header({ counter, favItem }) {
         qty += v.qty
     })
 
-    // console.log(qty);
+    console.log(cart.cart);
 
     return (
         <div className="main-header">
