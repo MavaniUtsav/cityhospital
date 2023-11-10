@@ -10,13 +10,13 @@ import Departments from '../admin/containers/Departments/Departments';
 function AdminRoute(props) {
     return (
         <Layouts>
-        <Routes>
-            <Route path='/medicines' element={<Medicines />} />
-            <Route path='/doctors' element={<Doctors />} />
-            <Route path='/departments' element={<Departments />} />
-            {/* <Route path='/medicine/:id' element={<DialogForm />} /> */}
-            {/* <Route exact path='*' element={<Error />} /> */}
-        </Routes>
+            <Routes>
+                <Route path='/medicines' element={<Medicines />} />
+                <Route path='/doctors' element={<Doctors />} />
+                <Route path='/departments' element={<Departments />} />
+                {/* <Route path='/medicine/:id' element={<DialogForm />} /> */}
+                {/* <Route exact path='*' element={<Error />} /> */}
+            </Routes>
         </Layouts>
     );
 }

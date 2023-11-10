@@ -48,7 +48,7 @@ function Header({ counter, favItem }) {
                             <li><NavLink to='/department' className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             } >Departments</NavLink></li>
-                            <li><NavLink to='/doctor' className={({ isActive, isPending }) =>
+                            <li><NavLink to='/doctors' className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             }>Doctors</NavLink></li>
                             <li><NavLink to='/medicine' className={({ isActive, isPending }) =>
