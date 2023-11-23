@@ -8,6 +8,7 @@ import { deleteMedicines, addMedicines, getMedicines, updateMedicines } from '..
 import { API_URL } from '../../../Utilities/Api-url';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Alert, AlertTitle } from '@mui/material';
+import { deleteMedicine, getMedicine } from '../../../redux/slice/medicines.slice';
 
 
 function Medicines(props) {
@@ -17,7 +18,7 @@ function Medicines(props) {
     const medicines = useSelector(state => state.medicines)
 
     useEffect(() => {
-        dispatch(getMedicines())
+        dispatch(getMedicine())
     }, [])
 
     const handleFormSubmit = (data) => {
@@ -31,7 +32,7 @@ function Medicines(props) {
     }
 
     const handleDelete = (id) => {
-        dispatch(deleteMedicines(id))
+        dispatch(deleteMedicine(id))
     }
 
     const handleEdit = (data) => {

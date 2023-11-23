@@ -14,6 +14,7 @@ export const medicinesReducer = (state=initialState, action) => {
         case ERROR_MEDICINES:
             return{
                 isLoading: false,
+                
                 medicines: [],
                 error: action.payLoad
             }

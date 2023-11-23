@@ -1,6 +1,8 @@
 import { API_URL, DELETE_URL } from "../../Utilities/Api-url"
 import { addMedicinesData, deleteMedicinesData, getMedicinesData, updateMedicinesData } from "../../common/api/medicines.api";
+import { db } from "../../firebase";
 import { ADD_MEDICINES, DELETE_MEDICINE, ERROR_MEDICINES, GET_MEDICINES, LOADING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
+import { collection, addDoc } from "firebase/firestore"; 
 
 export const getMedicines = () => (dispatch) => {
     try {
@@ -30,17 +32,14 @@ export const deleteMedicines = (id) => (dispatch) => {
     }
 }
 
-export const addMedicines = (data) => (dispatch) => {
+export const addMedicines = (data) => async (dispatch) => {
+    
     try {
-        dispatch(loadingMedicines())
-        return setTimeout(function () {
-            addMedicinesData(data)
-                .then((response) => dispatch({ type: ADD_MEDICINES, payLoad: response.data }))
-                .then((error) => dispatch(errorMedicines(error)))
-        }, 1000)
-    } catch (error) {
-        dispatch(errorMedicines(error))
-    }
+        const docRef = await addDoc(collection(db, "medicines"), data);
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
 }
 
 export const updateMedicines = (data) => (dispatch) => {

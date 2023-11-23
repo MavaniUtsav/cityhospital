@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { addToCart } from '../../redux/Action/cart.action';
+import { getMedicine } from '../../redux/slice/medicines.slice';
 
 
 function Medicines({ increment, favItem, setFavItem }) {
@@ -26,7 +27,7 @@ function Medicines({ increment, favItem, setFavItem }) {
     console.log(cart);
 
     useEffect(() => {
-        dispatch(getMedicines())
+        dispatch(getMedicine())
     }, [])
 
     const handleAddCart = (id, event) => {
@@ -46,35 +47,35 @@ function Medicines({ increment, favItem, setFavItem }) {
     }
 
     const handleFilter = (value) => {
-        let secondD;
+        // let secondD;
 
-        secondD = medicines.medicines.filter((v) => {
-            return (
-                v.name.toLowerCase().includes(value.toLowerCase()) || v.desc.toLowerCase().includes(value.toLowerCase())
-            )
-        })
+        // secondD = medicines.medicines.filter((v) => {
+        //     return (
+        //         v.name.toLowerCase().includes(value.toLowerCase()) || v.desc.toLowerCase().includes(value.toLowerCase())
+        //     )
+        // })
 
-        switch (value) {
-            case 'lowtohigh':
-                secondD = [...medicines.medicines].sort((a, b) => a.price - b.price);
-                break;
+        // switch (value) {
+        //     case 'lowtohigh':
+        //         secondD = [...medicines.medicines].sort((a, b) => a.price - b.price);
+        //         break;
 
-            case 'hightolow':
-                secondD = [...medicines.medicines].sort((a, b) => b.price - a.price);
-                break;
+        //     case 'hightolow':
+        //         secondD = [...medicines.medicines].sort((a, b) => b.price - a.price);
+        //         break;
 
-            case 'atoz':
-                secondD = [...medicines.medicines].sort((a, b) => a.name > b.name ? 1 : -1);
-                break;
+        //     case 'atoz':
+        //         secondD = [...medicines.medicines].sort((a, b) => a.name > b.name ? 1 : -1);
+        //         break;
 
-            case 'ztoa':
-                secondD = [...medicines.medicines].sort((a, b) => a.name > b.name ? -1 : 1);
-        }
+        //     case 'ztoa':
+        //         secondD = [...medicines.medicines].sort((a, b) => a.name > b.name ? -1 : 1);
+        // }
 
-        setFilterData(secondD)
+        // setFilterData(secondD)
     }
 
-    const finalData = filterData.length > 0 ? filterData : medicines.medicines
+    // const finalData = filterData.length > 0 ? filterData : medicines.medicines
 
     return (
         <section id='medicines'>
@@ -111,7 +112,7 @@ function Medicines({ increment, favItem, setFavItem }) {
                                     <CircularProgress />
                                 </div>
                                 :
-                                finalData.map((v) => {
+                                medicines.medicines.map((v) => {
                                     return (
                                         <>
                                             <Link to={'/medicine/' + v.id}>
