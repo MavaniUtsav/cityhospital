@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { addMedicinesData, deleteMedicinesData, getMedicinesData } from "../../common/api/medicines.api"
+import { addMedicinesData, deleteMedicinesData, getMedicinesData } from "../../common/api/medicines.api";
+import { collection, getDocs, addDoc,doc, deleteDoc } from "firebase/firestore";
 import { reject } from "lodash"
+import { db } from "../../firebase";
 
 const initialState = {
     isLoading: false,
@@ -12,15 +14,23 @@ export const getMedicine = createAsyncThunk(
     'medicine/get',
     async () => {
         await new Promise((resolve, reject) => setTimeout(resolve, 1000))
-        const response = await getMedicinesData()
-        return response.data
+        // const response = await getMedicinesData()
+        let data = []
+
+        const querySnapshot = await getDocs(collection(db, "medicines"));
+        querySnapshot.forEach((doc) => {
+            data.push({ ...doc.data(), id: doc.id })
+        });
+
+        return data;
     }
 )
 
 export const deleteMedicine = createAsyncThunk(
     'medicine/delete',
     async (id) => {
-        const response = await deleteMedicinesData()
+        // const response = await deleteMedicinesData()
+        await deleteDoc(doc(db, "medicines", id));
 
         return id
     }
@@ -29,9 +39,17 @@ export const deleteMedicine = createAsyncThunk(
 // export const addMedicines = createAsyncThunk(
 //     'medicine/add',
 //     async (data) => {
-//         const response = await addMedicinesData()
+//         try {
+//             const docRef = await addDoc(collection(db, "medicines"), data);
 
-//         return response.data
+//             // dispatch({ type: ADD_MEDICINES, payLoad: { ...data, id: docRef.id } })
+
+//             console.log("Document written with ID: ", docRef.id);
+//         } catch (e) {
+//             console.error("Error adding document: ", e);
+//         }
+
+//         return { ...data, id: docRef.id };
 //     }
 // )
 

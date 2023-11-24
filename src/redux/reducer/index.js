@@ -4,11 +4,13 @@ import { medicinesReducer } from "./medicines.reducer";
 import { departmentsReducer } from "./departments.reducer";
 import { cartReducer } from "./cart.reducer";
 import medicinesSlice from "../slice/medicines.slice";
+import appointmentSlice from "../slice/appointment.slice";
 
 
 export const rootreducer = combineReducers({
     counter: counterReducer,
     medicines: medicinesSlice,
     departments: departmentsReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    appointment: appointmentSlice
 })

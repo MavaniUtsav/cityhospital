@@ -2,7 +2,7 @@ import { API_URL, DELETE_URL } from "../../Utilities/Api-url"
 import { addMedicinesData, deleteMedicinesData, getMedicinesData, updateMedicinesData } from "../../common/api/medicines.api";
 import { db } from "../../firebase";
 import { ADD_MEDICINES, DELETE_MEDICINE, ERROR_MEDICINES, GET_MEDICINES, LOADING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 
 export const getMedicines = () => (dispatch) => {
     try {
@@ -33,23 +33,31 @@ export const deleteMedicines = (id) => (dispatch) => {
 }
 
 export const addMedicines = (data) => async (dispatch) => {
-    
     try {
         const docRef = await addDoc(collection(db, "medicines"), data);
+
+        dispatch({ type: ADD_MEDICINES, payLoad: { ...data, id: docRef.id } })
+
         console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
+    } catch (e) {
         console.error("Error adding document: ", e);
-      }
+    }
 }
 
-export const updateMedicines = (data) => (dispatch) => {
-    try {
-        updateMedicinesData(data)
-            .then((response) => dispatch({ type: UPDATE_MEDICINES, payLoad: response.data }))
-            .then((error) => console.log(error))
-    } catch (error) {
-        console.log(error);
-    }
+export const updateMedicines = (data) => async (dispatch) => {
+    // try {
+    //     updateMedicinesData(data)
+    //         .then((response) => dispatch({ type: UPDATE_MEDICINES, payLoad: response.data }))
+    //         .then((error) => console.log(error))
+    // } catch (error) {
+    //     console.log(error);
+    // }
+    const washingtonRef = doc(db, "medicines", data.id);
+
+    delete data.id
+    
+    // Set the "capital" field of the city 'DC'
+    await updateDoc(washingtonRef, data);
 }
 
 export const loadingMedicines = () => (dispatch) => {

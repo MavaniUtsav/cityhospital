@@ -3,14 +3,60 @@ import InputBox from '../../components/UI/InputBox/InputBox';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from '../../firebase';
+import { addAppointment } from '../../redux/slice/appointment.slice';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+
+function CustomTabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+
+CustomTabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
 
 function Appointment(props) {
+    const [value, setValue] = React.useState(0);
 
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
 
     const date = new Date()
     date.setDate(date.getDate() - 1);
+
+    const handleChanges = (event, newValue) => {
+        setValue(newValue);
+    };
 
     const appointmentSchema = yup.object().shape({
         name: yup.string().required('*Please fill this field').matches(/^[a-zA-Z ]{3,15}$/, '*Please enter valid name'),
@@ -31,16 +77,16 @@ function Appointment(props) {
                     return false
                 }
             }),
-        file: yup.mixed()
-            .required()
-            .test("FILE_SIZE", "Uploaded file is too big.", (value) => {
-                // if (selectedFile <= 20000000) {
-                //     return true;
-                // } else {
-                //     return false;
-                // }
-                console.log(value);
-            })
+        // file: yup.mixed()
+        //     .required()
+        //     .test("FILE_SIZE", "Uploaded file is too big.", (value) => {
+        //         // if (selectedFile <= 20000000) {
+        //         //     return true;
+        //         // } else {
+        //         //     return false;
+        //         // }
+        //         console.log(value);
+        //     })
         // .test("FILE_SIZE", "Uploaded file is too big.",
         //     (value) => value && value.size <= 2000)
         // .test("FILE_FORMAT", "Uploaded file has unsupported format.",
@@ -55,7 +101,7 @@ function Appointment(props) {
             date: '',
             department: '',
             message: '',
-            file: ''
+            // file: ''
         },
         onSubmit: values => {
             let arr = values.message.split(" ");
@@ -69,6 +115,14 @@ function Appointment(props) {
 
             console.log(values);
             alert(JSON.stringify(values, null, 2));
+
+            try {
+                const docRef = addDoc(collection(db, "appointment"), values);
+                console.log("Document written with ID: ", docRef.id);
+              } catch (e) {
+                console.error("Error adding document: ", e);
+              }
+
             handleReset()
         },
         validationSchema: appointmentSchema
@@ -86,133 +140,146 @@ function Appointment(props) {
     return (
         <section id="appointment" className="appointment">
             <div className="container">
+                <br></br>
                 <BackBtn />
-                <div className="section-title">
-                    <h2>Make an Appointment</h2>
-                    <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
-                        blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
-                        Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
-                </div>
-                <form onSubmit={handleSubmit} method="post" role="form" className="php-email-form">
-                    <div className="row">
-                        <div className="col-md-4 form-group">
-                            <InputBox
-                                type="text"
-                                name="name"
-                                className="form-control"
-                                id="name"
-                                placeholder="Your Name"
-                                data-rule="minlen:4"
-                                data-msg="Please enter at least 4 chars"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.name}
-                            />
-                            {errors.name && touched.name ? <span className='error'>{errors.name}</span> : null}
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs value={value} onChange={handleChanges} aria-label="basic tabs example">
+                        <Tab label="Make Appointment" {...a11yProps(0)} />
+                        <Tab label="Appointment List" {...a11yProps(1)} />
+                    </Tabs>
+                </Box>
+                <CustomTabPanel value={value} index={0}>
+                    <div className="section-title">
+                        <h2>Make an Appointment</h2>
+                        <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
+                            blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
+                            Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
+                    </div>
+                    <form onSubmit={handleSubmit} method="post" role="form" className="php-email-form">
+                        <div className="row">
+                            <div className="col-md-4 form-group">
+                                <InputBox
+                                    type="text"
+                                    name="name"
+                                    className="form-control"
+                                    id="name"
+                                    placeholder="Your Name"
+                                    data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.name}
+                                />
+                                {errors.name && touched.name ? <span className='error'>{errors.name}</span> : null}
+                            </div>
+                            <div className="col-md-4 form-group mt-3 mt-md-0">
+                                <InputBox
+                                    type="email"
+                                    className="form-control"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Your Email"
+                                    data-rule="email"
+                                    data-msg="Please enter a valid email"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.email}
+                                />
+                                {errors.email && touched.email ? <span className='error'>{errors.email}</span> : null}
+                                <div className="validate" />
+                            </div>
+                            <div className="col-md-4 form-group mt-3 mt-md-0">
+                                <InputBox
+                                    type="tel"
+                                    className="form-control"
+                                    name="phone"
+                                    id="phone"
+                                    placeholder="Your Phone"
+                                    data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.phone}
+                                />
+                                {errors.phone && touched.phone ? <span className='error'>{errors.phone}</span> : null}
+                                <div className="validate" />
+                            </div>
                         </div>
-                        <div className="col-md-4 form-group mt-3 mt-md-0">
-                            <InputBox
-                                type="email"
+                        <div className="row">
+                            <div className="col-md-4 form-group mt-3">
+                                <InputBox
+                                    type="date"
+                                    name="date"
+                                    className="form-control datepicker"
+                                    id="date"
+                                    placeholder="Appointment Date"
+                                    data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.date}
+                                />
+                                {errors.date && touched.date ? <span className='error'>{errors.date}</span> : null}
+                                <div className="validate" />
+                            </div>
+                            <div className="col-md-4 form-group mt-3">
+                                <select
+                                    name="department"
+                                    id="department"
+                                    className="form-select"
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    value={values.department}
+                                >
+                                    <option value=''>Select Department</option>
+                                    <option value="Department 1">Department 1</option>
+                                    <option value="Department 2">Department 2</option>
+                                    <option value="Department 3">Department 3</option>
+                                </select>
+                                {errors.department && touched.department ? <span className='error'>{errors.department}</span> : null}
+                                <div className="validate" />
+                            </div>
+                            <div className="col-md-4 form-group mt-3">
+                                <InputBox
+                                    type="file"
+                                    name="file"
+                                    className="form-control"
+                                    onBlur={handleBlur}
+                                    onChange={(e) => setSelectedFile(e.target.files[0].size)}
+                                    value={values.file}
+                                    accept=".jpg"
+                                />
+                                {errors.file && touched.file ? <span className='error'>{errors.file}</span> : null}
+                            </div>
+                        </div>
+                        <div className="form-group mt-3">
+                            <textarea
                                 className="form-control"
-                                name="email"
-                                id="email"
-                                placeholder="Your Email"
-                                data-rule="email"
-                                data-msg="Please enter a valid email"
+                                name="message"
+                                rows={5}
+                                placeholder="Message (Optional)"
+                                defaultValue={""}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.email}
+                                value={values.message}
                             />
-                            {errors.email && touched.email ? <span className='error'>{errors.email}</span> : null}
+                            {errors.message && touched.message ? <span className='error'>{errors.message}</span> : null}
                             <div className="validate" />
                         </div>
-                        <div className="col-md-4 form-group mt-3 mt-md-0">
-                            <InputBox
-                                type="tel"
-                                className="form-control"
-                                name="phone"
-                                id="phone"
-                                placeholder="Your Phone"
-                                data-rule="minlen:4"
-                                data-msg="Please enter at least 4 chars"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.phone}
-                            />
-                            {errors.phone && touched.phone ? <span className='error'>{errors.phone}</span> : null}
-                            <div className="validate" />
+                        <div className="mb-3">
+                            <div className="loading">Loading</div>
+                            <div className="error-message" />
+                            <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-4 form-group mt-3">
-                            <InputBox
-                                type="date"
-                                name="date"
-                                className="form-control datepicker"
-                                id="date"
-                                placeholder="Appointment Date"
-                                data-rule="minlen:4"
-                                data-msg="Please enter at least 4 chars"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.date}
-                            />
-                            {errors.date && touched.date ? <span className='error'>{errors.date}</span> : null}
-                            <div className="validate" />
-                        </div>
-                        <div className="col-md-4 form-group mt-3">
-                            <select
-                                name="department"
-                                id="department"
-                                className="form-select"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.department}
-                            >
-                                <option value=''>Select Department</option>
-                                <option value="Department 1">Department 1</option>
-                                <option value="Department 2">Department 2</option>
-                                <option value="Department 3">Department 3</option>
-                            </select>
-                            {errors.department && touched.department ? <span className='error'>{errors.department}</span> : null}
-                            <div className="validate" />
-                        </div>
-                        <div className="col-md-4 form-group mt-3">
-                            <InputBox
-                                type="file"
-                                name="file"
-                                className="form-control"
-                                onBlur={handleBlur}
-                                onChange={(e) => setSelectedFile(e.target.files[0].size)}
-                                value={values.file}
-                                accept=".jpg"
-                            />
-                            {errors.file && touched.file ? <span className='error'>{errors.file}</span> : null}
-                        </div>
-                    </div>
-                    <div className="form-group mt-3">
-                        <textarea
-                            className="form-control"
-                            name="message"
-                            rows={5}
-                            placeholder="Message (Optional)"
-                            defaultValue={""}
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.message}
-                        />
-                        {errors.message && touched.message ? <span className='error'>{errors.message}</span> : null}
-                        <div className="validate" />
-                    </div>
-                    <div className="mb-3">
-                        <div className="loading">Loading</div>
-                        <div className="error-message" />
-                        <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-                    </div>
-                    <div className="text-center"><button type="submit" id='appointmentbtn'>Make an Appointment</button></div>
-                </form>
+                        <div className="text-center"><button type="submit" id='appointmentbtn'>Make an Appointment</button></div>
+                    </form>
+                </CustomTabPanel >
+                <CustomTabPanel value={value} index={1}>
+
+                </CustomTabPanel>
+
             </div>
-        </section>
+        </section >
 
     );
 }
