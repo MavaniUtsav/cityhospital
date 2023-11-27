@@ -17,13 +17,11 @@ function Departments(props) {
     },[])
 
     const handleFormSubmit = (data) => {
-
         if (update) {
             dispatch(updateDepartments(data))
         } else {
             dispatch(addDepartments(data))
         }
-
     }
 
     const handleDelete = (id) => {

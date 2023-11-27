@@ -85,10 +85,6 @@ function Medicines(props) {
                             </div>
                         </>
             }
-            <Alert severity="error" id='loading'>
-                <AlertTitle>Error</AlertTitle>
-                This is an error alert — <strong>{medicines.error}</strong>
-            </Alert>
         </div>
     )
 };

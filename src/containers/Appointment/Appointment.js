@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputBox from '../../components/UI/InputBox/InputBox';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
 import { collection, addDoc } from "firebase/firestore";
 import { db } from '../../firebase';
-import { addAppointment } from '../../redux/slice/appointment.slice';
+import { addAppointment, deleteAppointment, editAppointment, getAppointment } from '../../redux/slice/appointment.slice';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { DataGrid } from '@mui/x-data-grid';
+import { useDispatch, useSelector } from 'react-redux';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -47,9 +52,18 @@ function a11yProps(index) {
 
 function Appointment(props) {
     const [value, setValue] = React.useState(0);
+    const [update, setUpdate] = useState(null);
+
+    const appointment = useSelector(state => state.appointment)
+    const dispatch = useDispatch()
+
 
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
+
+    useEffect(() => {
+        dispatch(getAppointment())
+    }, [])
 
     const date = new Date()
     date.setDate(date.getDate() - 1);
@@ -58,6 +72,16 @@ function Appointment(props) {
         setValue(newValue);
     };
 
+    const handleDelete = (id) => {
+        dispatch(deleteAppointment(id))
+    }
+
+    const handleEdit = (data) => {
+        setValue(0)
+        setUpdate(data)
+        setValues(update)
+    }
+    console.log(update);
     const appointmentSchema = yup.object().shape({
         name: yup.string().required('*Please fill this field').matches(/^[a-zA-Z ]{3,15}$/, '*Please enter valid name'),
         email: yup.string().email('*Please enter valid email').required('*Please fill this field'),
@@ -104,31 +128,57 @@ function Appointment(props) {
             // file: ''
         },
         onSubmit: values => {
-            let arr = values.message.split(" ");
+            // let arr = values.message.split(" ");
 
-            let arrOne = arr.map((v) => {
-                return v[0].toUpperCase() + v.substring(1)
-            })
-            let arrTwo = arrOne.join(" ")
-            values.message = arrTwo
-            console.log(arrTwo);
+            // let arrOne = arr.map((v) => {
+            //     return v[0].toUpperCase() + v.substring(1)
+            // })
+            // let arrTwo = arrOne.join(" ")
+            // values.message = arrTwo
+            // console.log(arrTwo);
 
-            console.log(values);
-            alert(JSON.stringify(values, null, 2));
+            // console.log(values);
+            // alert(JSON.stringify(values, null, 2));
 
-            try {
-                const docRef = addDoc(collection(db, "appointment"), values);
-                console.log("Document written with ID: ", docRef.id);
-              } catch (e) {
-                console.error("Error adding document: ", e);
-              }
-
+            // try {
+            //     const docRef = addDoc(collection(db, "appointment"), values);
+            //     console.log("Document written with ID: ", docRef.id);
+            //   } catch (e) {
+            //     console.error("Error adding document: ", e);
+            //   }
+            if (update) {
+                dispatch(editAppointment(values))
+            } else {
+                dispatch(addAppointment(values))
+            }
+            // console.log(values);
             handleReset()
         },
         validationSchema: appointmentSchema
     })
 
-    const { handleSubmit, handleBlur, handleChange, handleReset, errors, touched, values } = formikObj;
+    const { handleSubmit, handleBlur, handleChange, handleReset, errors, touched, values, setValues } = formikObj;
+
+    console.log(appointment.appointment);
+
+    const columns = [
+        { field: 'name', headerName: 'Patient Name', width: 140 },
+        { field: 'email', headerName: 'Email', width: 100 },
+        { field: 'phone', headerName: 'Phone', width: 120 },
+        { field: 'date', headerName: 'Date', width: 120 },
+        { field: 'department', headerName: 'Department', width: 120 },
+        { field: 'message', headerName: 'Message', width: 300 },
+        {
+            field: 'action', headerName: 'Action', width: 300, renderCell: (params) => (
+                <strong>
+                    <EditIcon id='editico' onClick={() => handleEdit(params.row)} />
+                    {/* onClick={() => handleEdit(params.row)} */}
+                    <DeleteIcon id='deleteico' onClick={() => { handleDelete(params.row.id) }} />
+                    {/* onClick={() => { handleDelete(params.row.id) }}  */}
+                </strong>
+            )
+        },
+    ];
 
     // const changeHandler = (event) => {
     //     setSelectedFile(event.files[0]);
@@ -275,7 +325,19 @@ function Appointment(props) {
                     </form>
                 </CustomTabPanel >
                 <CustomTabPanel value={value} index={1}>
-
+                    <div style={{ height: '60vh', width: '100%', marginTop: '12px', marginBottom: '12px' }}>
+                        <DataGrid
+                            rows={appointment.appointment}
+                            columns={columns}
+                            initialState={{
+                                pagination: {
+                                    paginationModel: { page: 0, pageSize: 5 },
+                                },
+                            }}
+                            pageSizeOptions={[5, 10, 15, 20]}
+                            checkboxSelection
+                        />
+                    </div>
                 </CustomTabPanel>
 
             </div>
