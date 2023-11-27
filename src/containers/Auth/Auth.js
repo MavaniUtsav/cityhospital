@@ -4,9 +4,12 @@ import InputBox from '../../components/UI/InputBox/InputBox';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
+import { useDispatch } from 'react-redux';
+import { signupRequest } from '../../redux/Action/auth.action';
 
 function Auth(props) {
     const [type, setType] = useState('login');
+    const dispatch = useDispatch()
 
     let authObj, initVal;
     if (type === 'login') {
@@ -46,13 +49,20 @@ function Auth(props) {
         }
     }
 
+    const handleSignup = (values) => {
+        dispatch(signupRequest(values))
+    }
 
     const authSchema = yup.object().shape(authObj);
 
     const formikObj = useFormik({
         initialValues: initVal,
         onSubmit: values => {
-            console.log(values);
+            if (type === 'login') {
+
+            } else if (type === 'signup') {
+                handleSignup(values)
+            }
         },
         enableReinitialize: true,
         validationSchema: authSchema

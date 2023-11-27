@@ -19,5 +19,5 @@ export const INC_QTY = "INC_QTY";
 export const DEC_QTY = "DEC_QTY";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 
-export const ADD_APPOINT = 'ADD_APPOINT';
+export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
 

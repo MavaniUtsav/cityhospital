@@ -5,6 +5,7 @@ import { departmentsReducer } from "./departments.reducer";
 import { cartReducer } from "./cart.reducer";
 import medicinesSlice from "../slice/medicines.slice";
 import appointmentSlice from "../slice/appointment.slice";
+import { signupReducer } from "./auth.reducer";
 
 
 export const rootreducer = combineReducers({
@@ -12,5 +13,6 @@ export const rootreducer = combineReducers({
     medicines: medicinesSlice,
     departments: departmentsReducer,
     cart: cartReducer,
-    appointment: appointmentSlice
+    appointment: appointmentSlice,
+    signup: signupReducer
 })
