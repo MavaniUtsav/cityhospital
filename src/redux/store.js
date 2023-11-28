@@ -21,9 +21,11 @@ let middlewares = [thunk, sagaMiddleware]
 export const configureStore = () => {
 
     let store = createStore(persistedReducer, applyMiddleware(...middlewares))
-    let persistor=persistStore(store)
 
     sagaMiddleware.run(rootSaga)
 
-    return {store,persistor}
+    return store;
 }
+
+export let store = configureStore()
+export let persistor=persistStore(store)

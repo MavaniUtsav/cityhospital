@@ -10,6 +10,7 @@ function About(props) {
     return (
         <section id="about" className="about">
             <div className="container">
+                <br></br>
                 <BackBtn />
                 <div className="row">
                     <div className="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center px-lg-5 abouttop">

@@ -6,6 +6,7 @@ function Doctor(props) {
     return (
         <section id="doctors" className="doctors">
             <div className="container">
+                <br></br>
                 <BackBtn />
                 <div className="section-title">
                     <Heading1>Doctors</Heading1>

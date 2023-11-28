@@ -80,6 +80,7 @@ function Medicines({ increment, favItem, setFavItem }) {
     return (
         <section id='medicines'>
             <div className='container'>
+                <br></br>
                 <BackBtn />
             </div>
             <div className='container'>

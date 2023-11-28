@@ -14,8 +14,6 @@ function Header({ counter, favItem }) {
         qty += v.qty
     })
 
-    console.log(qty);
-
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">

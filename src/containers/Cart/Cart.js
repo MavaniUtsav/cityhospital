@@ -32,6 +32,7 @@ function Cart(props) {
     return (
         <section className='margin'>
             <div className='container'>
+                <br></br>
                 <BackBtn />
                 <div className="card">
                     <div className="row">
@@ -43,7 +44,7 @@ function Cart(props) {
                                 </div>
                             </div>
                             {
-                                cartData.map((v,i) => {
+                                cartData.map((v, i) => {
                                     return (
                                         <div className="row border-top">
                                             <div className="row main align-items-center">
@@ -53,9 +54,9 @@ function Cart(props) {
                                                     <div className="row descCart" >{v.desc}</div>
                                                 </div>
                                                 <div className="col">
-                                                    <button href="#" className='cbtn' onClick={() => decQty(v.id)}>-</button><a href="#" className="border">{v.qty}</a><button href="#" className='cbtn'  onClick={() => incQty(v.id)}>+</button>
+                                                    <button href="#" className='cbtn' onClick={() => decQty(v.id)}>-</button><a href="#" className="border">{v.qty}</a><button href="#" className='cbtn' onClick={() => incQty(v.id)}>+</button>
                                                 </div>
-                                                <div className="col">{'₹ '+v.price * v.qty} <button className="close" style={{ marginLeft: '6rem', backgroundColor: 'transparent', border: 'none', fontSize: '18px' }} onClick={() => removeCartItem(v.id)}>✕</button></div>
+                                                <div className="col">{'₹ ' + v.price * v.qty} <button className="close" style={{ marginLeft: '6rem', backgroundColor: 'transparent', border: 'none', fontSize: '18px' }} onClick={() => removeCartItem(v.id)}>✕</button></div>
                                             </div>
                                         </div>
                                     )

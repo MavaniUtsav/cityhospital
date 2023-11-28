@@ -23,6 +23,7 @@ function ReviewDetails(props) {
     return (
         <div className='container'>
             <div className='revicard'>
+                <br></br>
                 <BackBtn />
                 <Heading1>{medicinesData.name}</Heading1>
                 <InnerText2 id='center'>{medicinesData.body}</InnerText2>

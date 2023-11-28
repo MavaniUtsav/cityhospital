@@ -1,4 +1,4 @@
-import { SIGNUP_REQUEST } from "../ActionType";
+import { LOGIN_REQUEST, SIGNUP_REQUEST } from "../ActionType";
 
 const initialState = {
     isLoading: false,

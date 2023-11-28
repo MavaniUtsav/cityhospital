@@ -36,6 +36,7 @@ function Contact(props) {
     return (
         <section id="contact" className="contact">
             <div className="container">
+                <br></br>
                 <BackBtn />
                 <div className="section-title">
                     <Heading1>Contact</Heading1>

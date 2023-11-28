@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
 import { useDispatch } from 'react-redux';
-import { signupRequest } from '../../redux/Action/auth.action';
+import { loginRequest, signupRequest } from '../../redux/Action/auth.action';
 
 function Auth(props) {
     const [type, setType] = useState('login');
@@ -53,16 +53,22 @@ function Auth(props) {
         dispatch(signupRequest(values))
     }
 
+    const handleLogin = (values) => {
+        dispatch(loginRequest(values))
+    }
+
     const authSchema = yup.object().shape(authObj);
 
     const formikObj = useFormik({
         initialValues: initVal,
         onSubmit: values => {
             if (type === 'login') {
-
+                handleLogin(values)
             } else if (type === 'signup') {
                 handleSignup(values)
             }
+
+            // handleReset()
         },
         enableReinitialize: true,
         validationSchema: authSchema
@@ -73,6 +79,7 @@ function Auth(props) {
     return (
         <section id="doctors" class="doctors">
             <div class="container">
+                <br></br>
                 <BackBtn />
                 <div class="section-title">
                     {

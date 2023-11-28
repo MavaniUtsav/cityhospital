@@ -20,4 +20,6 @@ export const DEC_QTY = "DEC_QTY";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 
 export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
+export const SIGNUP_RESPONSE = "SIGNUP_RESPONSE";
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
 

@@ -15,6 +15,7 @@ function Department(props) {
     return (
         <section id="departments" className="departments">
             <div className="container">
+                <br></br>
                 <BackBtn />
                 <div className="section-title">
                     <Heading1>Departments</Heading1>

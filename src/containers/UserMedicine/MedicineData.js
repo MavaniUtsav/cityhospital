@@ -7,7 +7,7 @@ import { Heading4, Heading5 } from '../../components/UI/Card/CardBox.style';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMedicines } from '../../redux/Action/medicines.action';
 
-function MedicineData({data}) {
+function MedicineData({ data }) {
     const { id } = useParams()
 
     const dispatch = useDispatch();
@@ -20,7 +20,9 @@ function MedicineData({data}) {
     return (
         <div>
             <div className='container'>
-                <div className='revicard'><BackBtn /></div>
+                <div className='revicard'>
+                    <br></br><BackBtn />
+                </div>
                 {medicines.medicines.map((v) => {
                     if (parseInt(id) === v.id) {
                         return (
