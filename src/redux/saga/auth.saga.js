@@ -5,6 +5,7 @@ import { signupApi } from '../../common/api/auth.api'
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* signupUser(action) {
+    console.log(action.payload);
     try {
         const user = yield call(signupApi, action.payload)
         yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
