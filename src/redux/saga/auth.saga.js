@@ -7,9 +7,9 @@ import { signupApi } from '../../common/api/auth.api'
 function* signupUser(action) {
     try {
         const user = yield call(signupApi, action.payload)
-        // yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
+        yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
     } catch (e) {
-        // yield put({ type: 'USER_FETCH_FAILED', message: e.message })
+        yield put({ type: 'USER_FETCH_FAILED', message: e.message })
     }
 }
 

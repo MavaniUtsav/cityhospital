@@ -81,7 +81,7 @@ function Appointment(props) {
         setUpdate(data)
         setValues(update)
     }
-    console.log(update);
+    
     const appointmentSchema = yup.object().shape({
         name: yup.string().required('*Please fill this field').matches(/^[a-zA-Z ]{3,15}$/, '*Please enter valid name'),
         email: yup.string().email('*Please enter valid email').required('*Please fill this field'),
