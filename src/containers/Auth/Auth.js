@@ -25,7 +25,7 @@ function Auth(props) {
         authObj = {
             name: yup.string().required(),
             email: yup.string().email().required(),
-            password: yup.string().required().min(8, '*Minimum 8 charachter required'),
+            password: yup.string().required().min(2, '*Minimum 8 charachter required'),
             con_password: yup.string().required().test("con_password", "Password is not same", function (val) {
                 if (val === this.parent.password) {
                     return true;
