@@ -2,27 +2,29 @@ import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { authError, loginResponse, signupRequest, signupResponse } from '../Action/auth.action'
 import { LOGIN_REQUEST, SIGNUP_REQUEST, SIGNUP_RESPONSE } from '../ActionType'
 import { loginApi, signupApi } from '../../common/api/auth.api'
+import { setAlert } from '../slice/alert.slice';
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* signupUser(action) {
-    console.log(action.payload);
     try {
         const user = yield call(signupApi, action.payload)
+        console.log(user.user);
         yield put(signupResponse(user.user))
+        yield put(setAlert({text: user.message, color: 'success'}))
     } catch (error) {
         yield put(authError(error.message))
+        yield put(setAlert({text: error.message, color: 'error'}))
     }
 }
 
 function* loginUser(action) {
-    console.log(action.payload);
-
     try {
         const user = yield call(loginApi, action.payload)
-        console.log(user);
         yield put(loginResponse(user.user))
+        yield put(setAlert({text: user.message, color: 'success'}))
     } catch (error) {
         yield put(authError(error.message))
+        yield put(setAlert({text: error.message, color: 'error'}))
     }
 }
 

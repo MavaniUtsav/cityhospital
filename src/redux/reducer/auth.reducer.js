@@ -7,8 +7,6 @@ const initialState = {
 }
 
 export const signupReducer = (state = initialState, action) => {
-    console.log(action.payload);
-
     switch (action.type) {
         case SIGNUP_REQUEST:
             return state
