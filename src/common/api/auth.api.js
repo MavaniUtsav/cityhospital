@@ -59,3 +59,7 @@ export const loginApi = (data) => {
         console.log(error);
     }
 }
+
+export const forgotApi = (data) => {
+    console.log(data);
+}

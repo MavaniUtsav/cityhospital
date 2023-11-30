@@ -1,4 +1,4 @@
-import { AUTH_ERROR, LOGIN_REQUEST, LOGIN_RESPONSE, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType"
+import { AUTH_ERROR, FORGOT_REQUEST, LOGIN_REQUEST, LOGIN_RESPONSE, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType"
 
 export const signupRequest = (values) => (dispatch) => {
     console.log(values);
@@ -19,4 +19,8 @@ export const loginRequest = (values) => (dispatch) => {
 
 export const loginResponse = (valuse) => (dispatch) => {
     dispatch({type: LOGIN_RESPONSE, payload: valuse})
+}
+
+export const forgotRequest = (values) => (dispatch) => {
+    dispatch({type: FORGOT_REQUEST, payload: values})
 }

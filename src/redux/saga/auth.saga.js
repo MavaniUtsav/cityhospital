@@ -1,7 +1,7 @@
 import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { authError, loginResponse, signupRequest, signupResponse } from '../Action/auth.action'
-import { LOGIN_REQUEST, SIGNUP_REQUEST, SIGNUP_RESPONSE } from '../ActionType'
-import { loginApi, signupApi } from '../../common/api/auth.api'
+import { FORGOT_REQUEST, LOGIN_REQUEST, SIGNUP_REQUEST, SIGNUP_RESPONSE } from '../ActionType'
+import { forgotApi, loginApi, signupApi } from '../../common/api/auth.api'
 import { setAlert } from '../slice/alert.slice';
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
@@ -28,6 +28,15 @@ function* loginUser(action) {
     }
 }
 
+function* forgotPassword(action) {
+    try {
+        const user = yield call(forgotApi, action.payload)
+        // console.log(user);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
@@ -38,6 +47,10 @@ function* watchSignup() {
 
 function* watchLogin() {
     yield takeEvery(LOGIN_REQUEST, loginUser)
+}
+
+function* watchForgot() {
+    yield takeEvery(FORGOT_REQUEST, forgotPassword)
 }
 
 export default function* userSaga() {

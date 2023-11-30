@@ -57,6 +57,10 @@ function Auth(props) {
         dispatch(loginRequest(values))
     }
 
+    const handleForgot = () => {
+        dispatch()
+    }
+
     const authSchema = yup.object().shape(authObj);
 
     const formikObj = useFormik({
@@ -66,6 +70,8 @@ function Auth(props) {
                 handleLogin(values)
             } else if (type === 'signup') {
                 handleSignup(values)
+            } else if (type === 'forgot') {
+                handleForgot(values)
             }
 
             // handleReset()
