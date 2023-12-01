@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
 import { useDispatch } from 'react-redux';
-import { loginRequest, signupRequest } from '../../redux/Action/auth.action';
+import { forgotRequest, loginRequest, signupRequest } from '../../redux/Action/auth.action';
 
 function Auth(props) {
     const [type, setType] = useState('login');
@@ -57,8 +57,8 @@ function Auth(props) {
         dispatch(loginRequest(values))
     }
 
-    const handleForgot = () => {
-        dispatch()
+    const handleForgot = (values) => {
+        dispatch(forgotRequest(values))
     }
 
     const authSchema = yup.object().shape(authObj);

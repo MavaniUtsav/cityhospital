@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { SIGNUP_RESPONSE } from "../../redux/ActionType";
 
@@ -62,4 +62,25 @@ export const loginApi = (data) => {
 
 export const forgotApi = (data) => {
     console.log(data);
+
+    try {
+        return new Promise((resolve, reject) => {
+            sendPasswordResetEmail(auth, data.email)
+                .then(() => {
+                    // Password reset email sent!
+                    resolve({ message: "Password reset email sent!"})
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    
+                    // if (errorCode.localeCompare('auth/invalid-email') === 0) {
+                    //     reject({ message: 'The provided email is invalid!' })
+                    // }
+                    console.log(errorCode);
+                });
+        })
+    } catch (error) {
+        console.log(error);
+    }
 }

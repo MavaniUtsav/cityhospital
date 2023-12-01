@@ -31,9 +31,10 @@ function* loginUser(action) {
 function* forgotPassword(action) {
     try {
         const user = yield call(forgotApi, action.payload)
-        // console.log(user);
+        yield put(setAlert({text: user.message, color: 'success'}))
     } catch (error) {
-        console.log(error);
+        yield put(authError(error.message))
+        yield put(setAlert({text: error.message, color: 'error'}))
     }
 }
 
@@ -56,6 +57,7 @@ function* watchForgot() {
 export default function* userSaga() {
     yield all([
         watchSignup(),
-        watchLogin()
+        watchLogin(),
+        watchForgot()
     ])
 }
