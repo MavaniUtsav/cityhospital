@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 function Header({ counter, favItem }) {
     // const [qty, setQty] = useState
     const cart = useSelector(state => state.cart)
+    const auth = useSelector(state => state.auth)
+    console.log(auth.user);
     let qty = 0;
 
     cart.cart.map((v) => {
@@ -63,11 +65,18 @@ function Header({ counter, favItem }) {
                     </nav>
                     <NavLink to='/appointment' className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</NavLink>
-                    <NavLink to='/auth' className="appointment-btn scrollto">
-                        <span className={({ isActive, isPending }) =>
-                            isActive ? "active" : ""
-                        }>Login/ Signup</span>
-                    </NavLink>
+                    {
+                        auth.user ? <NavLink to='/' className="appointment-btn scrollto">
+                            <span className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            }>Logout</span>
+                        </NavLink> : <NavLink to='/auth' className="appointment-btn scrollto">
+                            <span className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            }>Login/ Signup</span>
+                        </NavLink>
+                    }
+
 
                     <Link to='/cart'>
                         <Badge className='badge' badgeContent={qty} color="primary">

@@ -17,8 +17,8 @@ export const loginRequest = (values) => (dispatch) => {
     dispatch({type: LOGIN_REQUEST, payload: values})
 }
 
-export const loginResponse = (valuse) => (dispatch) => {
-    dispatch({type: LOGIN_RESPONSE, payload: valuse})
+export const loginResponse = (values) => (dispatch) => {
+    dispatch({type: LOGIN_RESPONSE, payload: values})
 }
 
 export const forgotRequest = (values) => (dispatch) => {

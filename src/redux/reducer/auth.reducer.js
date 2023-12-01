@@ -1,4 +1,4 @@
-import { AUTH_ERROR, LOGIN_REQUEST, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType";
+import { AUTH_ERROR, LOGIN_REQUEST, LOGIN_RESPONSE, SIGNUP_REQUEST, SIGNUP_RESPONSE } from "../ActionType";
 
 const initialState = {
     isLoading: false,
@@ -6,7 +6,7 @@ const initialState = {
     user: []
 }
 
-export const signupReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SIGNUP_REQUEST:
             return state
@@ -25,8 +25,12 @@ export const signupReducer = (state = initialState, action) => {
                 user: []
             }
 
-        case LOGIN_REQUEST:
-            return state
+        case LOGIN_RESPONSE:
+            return {
+                isLoading: false,
+                errorMessage: null,
+                user: action.payload
+            }
 
         default:
             return state

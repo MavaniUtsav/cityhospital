@@ -1,9 +1,13 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { SIGNUP_RESPONSE } from "../../redux/ActionType";
+import { useSelector } from "react-redux";
+
+
 
 export const signupApi = (data) => {
     console.log(data);
+
 
     try {
         return new Promise((resolve, reject) => {
@@ -36,7 +40,6 @@ export const signupApi = (data) => {
 }
 
 export const loginApi = (data) => {
-    console.log(data);
 
     try {
         return new Promise((resolve, reject) => {
@@ -44,7 +47,12 @@ export const loginApi = (data) => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    resolve({ message: 'Sucessfully logged in!', user: user })
+
+                    if (user.emailVerified) {
+                        resolve({ message: 'Sucessfully logged in!', user: user })
+                    } else {
+                        reject({message: 'Email is not verified'})
+                    }
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -68,12 +76,12 @@ export const forgotApi = (data) => {
             sendPasswordResetEmail(auth, data.email)
                 .then(() => {
                     // Password reset email sent!
-                    resolve({ message: "Password reset email sent!"})
+                    resolve({ message: "Password reset email sent!" })
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    
+
                     // if (errorCode.localeCompare('auth/invalid-email') === 0) {
                     //     reject({ message: 'The provided email is invalid!' })
                     // }

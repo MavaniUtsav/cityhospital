@@ -4,12 +4,14 @@ import InputBox from '../../components/UI/InputBox/InputBox';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import BackBtn from '../../components/UI/BackBtn/BackBtn';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { forgotRequest, loginRequest, signupRequest } from '../../redux/Action/auth.action';
 
 function Auth(props) {
     const [type, setType] = useState('login');
     const dispatch = useDispatch()
+    const auth = useSelector(state => state.auth)
+    console.log(auth.user);
 
     let authObj, initVal;
     if (type === 'login') {
