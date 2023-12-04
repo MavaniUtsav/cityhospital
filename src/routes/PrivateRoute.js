@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 
 function PrivateRoute(props) {
-    const auths = useSelector(state => state.auth)
-    console.log(auths.user);
+    const auth = useSelector(state => state.auth)
+    console.log(auth);
 
-    const auth = false
     return (
-        auths.user !== null ? <Outlet /> : <Navigate to='/auth' />
+        auth.user ? <Outlet /> : <Navigate to='/auth' replace/>
     );
 }
 

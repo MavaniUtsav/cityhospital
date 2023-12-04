@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail, reauthenticateWithCredential, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { SIGNUP_RESPONSE } from "../../redux/ActionType";
 import { useSelector } from "react-redux";
@@ -51,7 +51,7 @@ export const loginApi = (data) => {
                     if (user.emailVerified) {
                         resolve({ message: 'Sucessfully logged in!', user: user })
                     } else {
-                        reject({message: 'Email is not verified'})
+                        reject({ message: 'Email is not verified' })
                     }
                 })
                 .catch((error) => {
@@ -72,6 +72,11 @@ export const forgotApi = (data) => {
     console.log(data);
 
     try {
+        // const fetchEmail = fetchSignInMethodsForEmail(auth, data.email)
+        fetchSignInMethodsForEmail(auth, data.email).then((result) => {
+            console.log(result);
+        });
+
         return new Promise((resolve, reject) => {
             sendPasswordResetEmail(auth, data.email)
                 .then(() => {
@@ -82,9 +87,11 @@ export const forgotApi = (data) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
 
-                    // if (errorCode.localeCompare('auth/invalid-email') === 0) {
-                    //     reject({ message: 'The provided email is invalid!' })
-                    // }
+                    if (errorCode.localeCompare('auth/invalid-email') === 0) {
+                        reject({ message: 'The provided email is invalid!' })
+                    } else if (errorCode.localeCompare('auth/user-not-found') === 0) {
+                        reject({ message: 'No user record found for the provided email!' })
+                    }
                     console.log(errorCode);
                 });
         })

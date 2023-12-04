@@ -94,6 +94,7 @@ function Auth(props) {
                         type === 'login' ? <h2>Login</h2> : type === 'signup' ? <h2>Signup</h2> : <h2>Forgot password</h2>
                     }
                 </div>
+                {/* <br type='button'/> */}
                 <section id="appointment" class="appointment">
                     <form onSubmit={handleSubmit} role="form" class="php-email-form">
                         <div class="row justify-content-center">

@@ -66,7 +66,7 @@ function Header({ counter, favItem }) {
                     <NavLink to='/appointment' className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</NavLink>
                     {
-                        auth.user ? <NavLink to='/' className="appointment-btn scrollto">
+                        !auth.user ? <NavLink to='/' className="appointment-btn scrollto">
                             <span className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             }>Logout</span>
