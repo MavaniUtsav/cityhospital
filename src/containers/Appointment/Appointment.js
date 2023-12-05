@@ -101,8 +101,8 @@ function Appointment(props) {
                     return false
                 }
             }),
-        // file: yup.mixed()
-        //     .required()
+        file: yup.mixed()
+            .required()
         //     .test("FILE_SIZE", "Uploaded file is too big.", (value) => {
         //         // if (selectedFile <= 20000000) {
         //         //     return true;
@@ -125,7 +125,7 @@ function Appointment(props) {
             date: '',
             department: '',
             message: '',
-            // file: ''
+            file: ''
         },
         onSubmit: values => {
             // let arr = values.message.split(" ");
@@ -151,15 +151,13 @@ function Appointment(props) {
             } else {
                 dispatch(addAppointment(values))
             }
-            // console.log(values);
+
             handleReset()
         },
         validationSchema: appointmentSchema
     })
 
-    const { handleSubmit, handleBlur, handleChange, handleReset, errors, touched, values, setValues } = formikObj;
-
-    console.log(appointment.appointment);
+    const { handleSubmit, handleBlur, handleChange, handleReset, setFieldValue, errors, touched, values, setValues } = formikObj;
 
     const columns = [
         { field: 'name', headerName: 'Patient Name', width: 140 },
@@ -172,21 +170,11 @@ function Appointment(props) {
             field: 'action', headerName: 'Action', width: 300, renderCell: (params) => (
                 <strong>
                     <EditIcon id='editico' onClick={() => handleEdit(params.row)} />
-                    {/* onClick={() => handleEdit(params.row)} */}
                     <DeleteIcon id='deleteico' onClick={() => { handleDelete(params.row.id) }} />
-                    {/* onClick={() => { handleDelete(params.row.id) }}  */}
                 </strong>
             )
         },
     ];
-
-    // const changeHandler = (event) => {
-    //     setSelectedFile(event.files[0]);
-    // 	setIsFilePicked(true);
-
-    //     console.log(selectedFile);
-    // }
-    // console.log(selectedFile);
     return (
         <section id="appointment" className="appointment">
             <div className="container">
@@ -295,9 +283,7 @@ function Appointment(props) {
                                     name="file"
                                     className="form-control"
                                     onBlur={handleBlur}
-                                    onChange={(e) => setSelectedFile(e.target.files[0].size)}
-                                    value={values.file}
-                                    accept=".jpg"
+                                    onChange={(e) => setFieldValue("file",e.target.files[0])}
                                 />
                                 {errors.file && touched.file ? <span className='error'>{errors.file}</span> : null}
                             </div>

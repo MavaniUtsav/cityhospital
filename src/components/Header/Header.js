@@ -16,6 +16,7 @@ function Header({ counter, favItem }) {
         qty += v.qty
     })
 
+    console.log(auth.user);
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -66,7 +67,7 @@ function Header({ counter, favItem }) {
                     <NavLink to='/appointment' className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</NavLink>
                     {
-                        !auth.user ? <NavLink to='/' className="appointment-btn scrollto">
+                        auth.user ? <NavLink to='/' className="appointment-btn scrollto">
                             <span className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             }>Logout</span>
@@ -77,7 +78,6 @@ function Header({ counter, favItem }) {
                         </NavLink>
                     }
 
-
                     <Link to='/cart'>
                         <Badge className='badge' badgeContent={qty} color="primary">
                             <AddShoppingCartIcon />
@@ -87,8 +87,8 @@ function Header({ counter, favItem }) {
                         <FavoriteBorderIcon />
                     </Badge>
                 </div>
-            </header>
-        </div>
+            </header >
+        </div >
     );
 }
 

@@ -76,7 +76,7 @@ function Auth(props) {
                 handleForgot(values)
             }
 
-            // handleReset()
+            handleReset()
         },
         enableReinitialize: true,
         validationSchema: authSchema

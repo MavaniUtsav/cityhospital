@@ -10,7 +10,7 @@ import persistStore from "redux-persist/es/persistStore"
 const persisstConfig = {
     key : 'root',
     storage: storage,
-    whitelist: ['medicines','cart','signup']
+    whitelist: ['medicines','cart','auth']
 }
 
 const persistedReducer = persistReducer(persisstConfig,rootreducer)

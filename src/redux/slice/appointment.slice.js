@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db, storage } from "../../firebase";
+import { ref, uploadBytes } from "firebase/storage";
 import { ADD_APPOINT } from "../ActionType";
 import { async } from "q";
 
@@ -29,6 +30,16 @@ export const getAppointment = createAsyncThunk(
 export const addAppointment = createAsyncThunk(
     'appointment/post',
     async (data) => {
+
+        //*This is for File Upload
+        const storageRef = ref(storage, 'apt/' + data.file.name);
+
+        uploadBytes(storageRef, data.file).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });
+        //*
+        delete data.file
+
         const docRef = await addDoc(collection(db, "appointment"), data);
 
         console.log("Document written with ID: ", docRef.id);
