@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ADD_APPOINT } from "../ActionType";
 import { async } from "q";
 
@@ -30,39 +30,95 @@ export const getAppointment = createAsyncThunk(
 export const addAppointment = createAsyncThunk(
     'appointment/post',
     async (data) => {
+        const number = Math.floor(Math.random() * 10000);
 
+        let aptdata = { ...data };
         //*This is for File Upload
-        const storageRef = ref(storage, 'apt/' + data.file.name);
+        const storageRef = ref(storage, "appointment/" + number + "_" + data.file.name);
 
-        uploadBytes(storageRef, data.file).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
+        uploadBytes(storageRef, data.file).then(async (snapshot) => {
+            await getDownloadURL(ref(storage, snapshot.ref)).then(async url => {
+                console.log(url);
+
+                const aptdoc = await addDoc(collection(db, "appointment"), {
+                    ...data,
+                    dataname: number + "_" + data.file.name,
+                    file: url
+                });
+
+                aptdata = {
+                    id: aptdoc.id,
+                    ...data,
+                    dataname: number + "_" + data.file.name,
+                    file: url
+                };
+
+                console.log(aptdata);
+            });
         });
-        //*
-        delete data.file
-
-        const docRef = await addDoc(collection(db, "appointment"), data);
-
-        console.log("Document written with ID: ", docRef.id);
-    }
-)
+        return aptdata;
+    })
 
 export const deleteAppointment = createAsyncThunk(
     'appointment/delete',
-    async (id) => {
-        await deleteDoc(doc(db, "appointment", id));
+    async (data) => {
+        const desertRef = ref(storage, 'appointment/' + data.dataname);
 
-        return id
+        deleteObject(desertRef).then(async () => {
+            // File deleted successfully
+            await deleteDoc(doc(db, "appointment/", data.id));
+        }).catch((error) => {
+            // Uh-oh, an error occurred!
+        });
+
+        return data.id;
     }
 )
 
 export const editAppointment = createAsyncThunk(
     'appointment/put',
     async (data) => {
-        const washingtonRef = doc(db, "appointment", data.id);
+        const number = Math.floor(Math.random() * 10000);
 
-        delete data.id
+        let aptdata = { ...data };
+        //*This is for File Upload
+        const storageRef = ref(storage, "appointment/" + number + "_" + data.file.name);
 
-        await updateDoc(washingtonRef, data);
+        if (typeof data.file === 'string') {
+            const aptRef = doc(db, "appointment", data.id);
+
+            await updateDoc(aptRef, data);
+        } else {
+            const desertRef = ref(storage, 'appointment/' + data.dataname);
+
+            deleteObject(desertRef).then(async () => {
+                // File deleted successfully
+                await deleteDoc(doc(db, "appointment/", data.id));
+            }).catch((error) => {
+                // Uh-oh, an error occurred!
+            });
+
+            uploadBytes(storageRef, data.file).then(async (snapshot) => {
+                await getDownloadURL(ref(storage, snapshot.ref))
+                    .then(async (url) => {
+                        const aptdoc = await addDoc(collection(db, "appointment"), {
+                            ...data,
+                            dataname: number + "_" + data.file.name,
+                            file: url
+                        });
+
+                        aptdata = {
+                            id: aptdoc.id,
+                            ...data,
+                            dataname: number + "_" + data.file.name,
+                            file: url
+                        };
+
+                        console.log(aptdata);
+                    });
+            });
+        }
+        return aptdata;
     }
 )
 

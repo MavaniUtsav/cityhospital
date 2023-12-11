@@ -52,14 +52,14 @@ function a11yProps(index) {
 
 function Appointment(props) {
     const [value, setValue] = React.useState(0);
-    const [update, setUpdate] = useState(null);
+    const [updates, setUpdates] = useState(false);
 
     const appointment = useSelector(state => state.appointment)
     const dispatch = useDispatch()
 
 
-    const [selectedFile, setSelectedFile] = useState();
-    const [isFilePicked, setIsFilePicked] = useState(false);
+    // const [selectedFile, setSelectedFile] = useState();
+    // const [isFilePicked, setIsFilePicked] = useState(false);
 
     useEffect(() => {
         dispatch(getAppointment())
@@ -72,16 +72,16 @@ function Appointment(props) {
         setValue(newValue);
     };
 
-    const handleDelete = (id) => {
-        dispatch(deleteAppointment(id))
+    const handleDelete = (data) => {
+        dispatch(deleteAppointment(data))
     }
 
     const handleEdit = (data) => {
         setValue(0)
-        setUpdate(data)
-        setValues(update)
+        setValues(data)
+        setUpdates(true)
     }
-    
+
     const appointmentSchema = yup.object().shape({
         name: yup.string().required('*Please fill this field').matches(/^[a-zA-Z ]{3,15}$/, '*Please enter valid name'),
         email: yup.string().email('*Please enter valid email').required('*Please fill this field'),
@@ -146,7 +146,8 @@ function Appointment(props) {
             //   } catch (e) {
             //     console.error("Error adding document: ", e);
             //   }
-            if (update) {
+            if (updates) {
+                console.log('Update');
                 dispatch(editAppointment(values))
             } else {
                 dispatch(addAppointment(values))
@@ -165,12 +166,13 @@ function Appointment(props) {
         { field: 'phone', headerName: 'Phone', width: 120 },
         { field: 'date', headerName: 'Date', width: 120 },
         { field: 'department', headerName: 'Department', width: 120 },
-        { field: 'message', headerName: 'Message', width: 300 },
+        { field: 'message', headerName: 'Message', width: 350 },
+        { field: 'file', headerName: 'Message', width: 165 },
         {
             field: 'action', headerName: 'Action', width: 300, renderCell: (params) => (
                 <strong>
                     <EditIcon id='editico' onClick={() => handleEdit(params.row)} />
-                    <DeleteIcon id='deleteico' onClick={() => { handleDelete(params.row.id) }} />
+                    <DeleteIcon id='deleteico' onClick={() => { handleDelete(params.row) }} />
                 </strong>
             )
         },
@@ -283,7 +285,11 @@ function Appointment(props) {
                                     name="file"
                                     className="form-control"
                                     onBlur={handleBlur}
-                                    onChange={(e) => setFieldValue("file",e.target.files[0])}
+                                    onChange={(e) => setFieldValue("file", e.target.files[0])}
+                                />
+                                <img 
+                                    style={{width: '75px', height: '75px', float: 'right'}}
+                                    src={typeof values.file === 'string' ? values.file : URL.createObjectURL(values.file)}
                                 />
                                 {errors.file && touched.file ? <span className='error'>{errors.file}</span> : null}
                             </div>
@@ -307,7 +313,7 @@ function Appointment(props) {
                             <div className="error-message" />
                             <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                         </div>
-                        <div className="text-center"><button type="submit" id='appointmentbtn'>Make an Appointment</button></div>
+                        <div className="text-center"><button type="submit" id='appointmentbtn'>{updates ? "Update an Appointment" : "Make an Appointment"}</button></div>
                     </form>
                 </CustomTabPanel >
                 <CustomTabPanel value={value} index={1}>
