@@ -6,10 +6,14 @@ function UseRef(props) {
 
     const count = useRef(0);
     const element = useRef('');
+    const preValue = useRef('');
+    console.log(preValue.current);
 
     useEffect(() => {
         // setCount(count + 1)
-        count.current = count.current + 1
+        count.current = count.current + 1;
+
+        preValue.current = myData
     })
 
     const handleChange = () => {
@@ -17,7 +21,6 @@ function UseRef(props) {
         console.log(element.current);
         element.current.style.backgroundColor = "#ff6337";
         element.current.focus()
-
     }
 
 
@@ -33,6 +36,7 @@ function UseRef(props) {
                 onChange={(e) => {setMyData(e.target.value)}}
             />
             <p>The number of times render: {count.current}</p>
+            <p>Previous Value: {preValue.current}</p>
             <button onClick={handleChange}>submit</button>
         </div>
     );

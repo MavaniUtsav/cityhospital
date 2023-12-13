@@ -9,16 +9,14 @@ function Header({ counter, favItem }) {
     // const [qty, setQty] = useState
     const cart = useSelector(state => state.cart)
     const auth = useSelector(state => state.auth)
-    console.log(auth.user);
     let qty = 0;
 
     cart.cart.map((v) => {
         qty += v.qty
     })
 
-    console.log(auth.user);
     return (
-        <div className="main-header">
+        <div className="main-header setMargin">
             <div id="topbar" className="d-flex align-items-center fixed-top">
                 <div className="container d-flex justify-content-between">
                     <div className="contact-info d-flex align-items-center">
@@ -67,7 +65,7 @@ function Header({ counter, favItem }) {
                     <NavLink to='/appointment' className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</NavLink>
                     {
-                        auth.user ? <NavLink to='/' className="appointment-btn scrollto">
+                        auth.user !== null ? <NavLink to='/' className="appointment-btn scrollto">
                             <span className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             }>Logout</span>
