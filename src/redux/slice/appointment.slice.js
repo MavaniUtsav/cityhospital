@@ -36,28 +36,28 @@ export const addAppointment = createAsyncThunk(
         //*This is for File Upload
         const storageRef = ref(storage, "appointment/" + number + "_" + data.file.name);
 
-        uploadBytes(storageRef, data.file).then(async (snapshot) => {
-            await getDownloadURL(ref(storage, snapshot.ref)).then(async url => {
-                console.log(url);
+        uploadBytes(storageRef, data.file)
+            .then(async (snapshot) => {
+                await getDownloadURL(ref(storage, snapshot.ref)).then(async url => {
+                    console.log(url);
 
-                const aptdoc = await addDoc(collection(db, "appointment"), {
-                    ...data,
-                    dataname: number + "_" + data.file.name,
-                    file: url
+                    const aptdoc = await addDoc(collection(db, "appointment"), {
+                        ...data,
+                        dataname: number + "_" + data.file.name,
+                        file: url
+                    });
+
+                    aptdata = {
+                        id: aptdoc.id,
+                        ...data,
+                        dataname: number + "_" + data.file.name,
+                        file: url
+                    };
                 });
-
-                aptdata = {
-                    id: aptdoc.id,
-                    ...data,
-                    dataname: number + "_" + data.file.name,
-                    file: url
-                };
-
-                console.log(aptdata);
             });
-        });
         return aptdata;
     })
+
 
 export const deleteAppointment = createAsyncThunk(
     'appointment/delete',
@@ -130,6 +130,7 @@ export const appointmentsSlice = createSlice({
     extraReducers: (builder) => {
         // builder.addCase(getMedicine.pending, onload)
         builder.addCase(getAppointment.fulfilled, (state, action) => {
+            
             state.isLoading = false;
             state.appointment = action.payload;
             state.error = null
@@ -149,8 +150,14 @@ export const appointmentsSlice = createSlice({
         })
 
         builder.addCase(addAppointment.fulfilled, (state, action) => {
+            console.log(action.payload);
+            console.log(state.appointment);
             state.isLoading = false
-            state.appointment = action.payload;
+            if (Array.isArray(state.appointment)) {
+                state.appointment = state.appointment.concat(action.payload);
+            } else {
+                state.appointment = [action.payload]; // If not an array, create a new array with the payload
+            }
             state.error = null
         })
     }

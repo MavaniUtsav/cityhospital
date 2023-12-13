@@ -147,7 +147,6 @@ function Appointment(props) {
             //     console.error("Error adding document: ", e);
             //   }
             if (updates) {
-                console.log('Update');
                 dispatch(editAppointment(values))
             } else {
                 dispatch(addAppointment(values))
