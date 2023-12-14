@@ -24,6 +24,7 @@ import Counter from '../containers/Counter/Counter';
 import Cart from '../containers/Cart/Cart';
 import UseRef from '../containers/Task/useRef';
 import UseMemo from '../containers/Task/useMemo';
+import UseCallback from '../containers/Task/useCallback';
 
 function UserRoute(props) {
     const [counter, setCounter] = useState(0);
@@ -58,6 +59,7 @@ function UserRoute(props) {
                 <Route exact path='/cart' element={<Cart />} />
                 <Route exact path='/useref' element={<UseRef />} />
                 <Route exact path='/usememo' element={<UseMemo />} />
+                <Route exact path='/usecallback' element={<UseCallback />} />
                 <Route exact path='*' element={<Error />} />
             </Routes>
             <Footer />

@@ -18,4 +18,6 @@ function UseMemo(props) {
     );
 }
 
+// (useMemo) is a React Hook that Memorize Value between re-renders.
+
 export default UseMemo;
