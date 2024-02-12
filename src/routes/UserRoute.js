@@ -25,6 +25,7 @@ import Cart from '../containers/Cart/Cart';
 import UseRef from '../containers/Task/useRef';
 import UseMemo from '../containers/Task/useMemo';
 import UseCallback from '../containers/Task/useCallback';
+import Chat from '../containers/Chat/Chat';
 
 function UserRoute(props) {
     const [counter, setCounter] = useState(0);
@@ -57,6 +58,7 @@ function UserRoute(props) {
                 <Route exact path="/form" element={<StepForm />} />
                 <Route exact path='/redux' element={<Counter />} />
                 <Route exact path='/cart' element={<Cart />} />
+                <Route exact path='/chat' element={<Chat />} />
                 <Route exact path='/useref' element={<UseRef />} />
                 <Route exact path='/usememo' element={<UseMemo />} />
                 <Route exact path='/usecallback' element={<UseCallback />} />

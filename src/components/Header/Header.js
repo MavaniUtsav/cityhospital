@@ -53,6 +53,9 @@ function Header({ counter, favItem }) {
                             <li><NavLink to='/medicine' className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             }>Medicines</NavLink></li>
+                            <li><NavLink to='/chat' className={({ isActive, isPending }) =>
+                                isActive ? "active" : ""
+                            }>Chat</NavLink></li>
                             <li><NavLink to='/about' className={({ isActive, isPending }) =>
                                 isActive ? "active" : ""
                             }>About</NavLink></li>
