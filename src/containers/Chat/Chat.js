@@ -1,21 +1,77 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { io } from 'socket.io-client';
 
 function Chat(props) {
-    const socket = io('http://localhost:4000')
+    const socket = useMemo(() => io('http://localhost:4000'), []);
+    const [chatId, setChatId] = useState('');
+    const [message, setMessage] = useState('');
+    const [groupId, setGroupId] = useState('');
 
     useEffect(() => {
-        // socket.on("connect", (socket) => {
-        //     // console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-        //   });
+        socket.on("connect", () => {
+            console.log(socket.id); // Access the socket ID like this
+        });
 
-        socket.on('send-msg', (msg) => {
-            console.log(msg);
-        })
+        socket.on("message", (message) => {
+            console.log(message); // Access the socket ID like this
+        });
+
+        // socket.on('send-msg', (msg) => {
+        //     console.log(msg);
+        // })
+
     }, [])
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        socket.emit('text', { chatId, message });
+
+        // Clear the message input
+        setMessage('');
+    }
+
+    const handleGroup = (e) => {
+        e.preventDefault()
+
+        socket.emit('join_group', groupId)
+        setGroupId('')
+    }
+
     return (
-        <div>
+        <div className='container'>
+            <br></br>
+            <br></br>
+            <form onSubmit={handleGroup}>
+                <input
+                    type='text'
+                    onChange={(e) => setGroupId(e.target.value)}
+                    value={groupId}
+                    placeholder='Enter group name'
+                />
+                <button type='submit' >submit</button>
+            </form>
+
+
+            <br></br>
+            <br></br>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type='text'
+                    onChange={(e) => setChatId(e.target.value)}
+                    value={chatId}
+                    placeholder='Enter chat ID'
+                />
+
+                <input
+                    type='text'
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
+                    placeholder='Type Message'
+                />
+
+                <button type='submit' >submit</button>
+            </form>
         </div>
     );
 }
